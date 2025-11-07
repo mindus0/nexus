@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitForge | Créer un Nouveau Fichier</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/7Gn3toV.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <!-- CodeMirror: Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    
+    <style>
+        /* Configuration de la police Inter */
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Variables de Thème (Mode Clair forcé pour le style GitHub) */
+        :root {
+            --bg-page: #FFFFFF;
+            --bg-header: #F6F8FA;
+            --bg-card: #FFFFFF;
+            --bg-active: #F3F4F6; 
+            --border-color: #D0D7DE; 
+            --text-color: #24292F; 
+            --text-secondary: #57606A;
+            --text-link: #0969DA; 
+            --primary-color: #2DA44E; /* Bouton Commit (Vert) */
+            --primary-hover: #2C974B; 
+        }
+
+        /* Classes utilitaires pour les variables */
+        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
+        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
+        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
+        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
+        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
+        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
+        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
+
+        /* Style spécifique pour la barre de navigation */
+        .repo-nav-link { padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-right: 0.5rem; }
+        .repo-nav-link.active { border-bottom-color: var(--text-link); color: var(--text-color) !important; font-weight: 600; }
+        
+        /* Ajustements CodeMirror pour qu'il remplisse l'espace */
+        .CodeMirror {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            height: 500px; /* Hauteur fixe pour l'édition */
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body class="bg-page-var text-color-var min-h-screen transition-colors-theme">
+    
+    <!-- BARRE DE NAVIGATION SUPÉRIEURE (HEADER) -->
+    <header class="w-full bg-header-var border-b border-color-var sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo et Nom du Dépôt -->
+                <div class="flex items-center space-x-4">
+                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
+                    <span class="text-xl font-bold text-color-var">GitForge</span>
+                    <span class="text-secondary-var">/</span>
+                    <a href="repo_files.html" class="text-color-var hover:text-link-var text-lg font-semibold">
+                        <span id="repo-user">mindus0</span> / <span id="repo-name">mailix</span>
+                    </a>
+                </div>
+                
+                <!-- Barre de Recherche et Boutons d'Action Rapide -->
+                <div class="flex items-center space-x-3">
+                    <div class="hidden sm:block">
+                        <input type="text" placeholder="Type / to search" 
+                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
+                    </div>
+                    <!-- Boutons d'action rapide (simulés) -->
+                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
+                        <span class="material-symbols-rounded">notifications</span>
+                    </button>
+                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
+                        <span class="material-symbols-rounded">add</span>
+                    </button>
+                    <button class="p-2 rounded-full text-secondary-var hover:text-color-var">
+                         <span class="material-symbols-rounded">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BARRE DE NAVIGATION SECONDAIRE (ONGLETS DE DÉPÔT) -->
+        <div class="w-full border-b border-color-var bg-page-var">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
+                    <a href="repo_files.html" class="repo-nav-link text-secondary-var hover:text-color-var active flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">code</span> Code
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">bug_report</span> Issues (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">merge</span> Pull requests (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">checklist</span> Actions
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    
+    <div id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Section Fichier et Branche -->
+        <div class="flex items-center space-x-2 mb-6 text-sm font-semibold">
+            <!-- Breadcrumb du Dépôt -->
+            <span class="text-color-var">
+                <span class="material-symbols-rounded text-lg align-bottom mr-1">folder</span>
+                <a href="repo_files.html" class="text-link-var hover:text-link-hover-var">mailix</a> /
+            </span>
+            
+            <!-- Champ de Nom de Fichier -->
+            <input type="text" id="file-path-input" value="" placeholder="Name your file..."
+                   class="p-1 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var w-96 max-w-full"
+                   required>
+                   
+            <!-- Branche Cible -->
+            <span class="text-secondary-var">in</span>
+            <span class="inline-flex items-center px-3 py-1 bg-active-var text-color-var rounded-lg">
+                <span class="material-symbols-rounded text-sm mr-1">git_branch</span>
+                main
+            </span>
+            
+            <!-- Boutons d'Action à Droite -->
+            <div class="ml-auto flex space-x-3">
+                <button id="cancel-changes" type="button" class="px-3 py-1.5 text-secondary-var hover:text-color-var hover:bg-active-var border border-transparent rounded-lg transition duration-150">
+                    Cancel changes
+                </button>
+                <button type="submit" id="commit-changes-btn" class="px-4 py-1.5 bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150 shadow-md disabled:opacity-50" disabled>
+                    Commit new file
+                </button>
+            </div>
+        </div>
+        
+        <!-- Barres d'Outils (Éditeur) -->
+        <div class="flex justify-between items-center border border-color-var border-b-0 rounded-t-lg bg-header-var px-4 py-2">
+            <div class="flex space-x-4">
+                <button class="flex items-center font-semibold text-color-var border-b-2 border-text-color pb-1">Edit</button>
+                <button class="flex items-center text-secondary-var hover:text-color-var hover:border-b-2 hover:border-text-secondary pb-1">Preview</button>
+            </div>
+            
+            <div class="flex items-center space-x-4 text-sm text-secondary-var">
+                <span id="space-option" class="inline-flex items-center space-x-1">
+                    <span>Spaces</span>
+                    <select id="indent-size" class="bg-active-var p-0.5 rounded text-color-var border-none focus:ring-link-var">
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                    </select>
+                </span>
+                <span class="hidden sm:inline-block">|</span>
+                <button id="no-wrap-toggle" class="hover:text-color-var">No wrap</button>
+            </div>
+        </div>
+        
+        <!-- ÉDITEUR CodeMirror -->
+        <div id="editor-container">
+            <textarea id="code-editor" name="code">
+// Écrivez votre code ici. 
+// Le mode de coloration syntaxique sera détecté automatiquement par l'extension du nom de fichier.
+
+</textarea>
+        </div>
+
+        <!-- Section Commit (Reprise de upload_file.html) -->
+        <form id="commit-form" class="bg-card-var p-6 rounded-lg border border-color-var shadow-lg mt-8">
+            <h2 class="text-lg font-semibold text-color-var mb-4">Commit new file</h2>
+            
+            <!-- Titre du Commit -->
+            <input type="text" id="commit-title" placeholder="Create new file" 
+                   class="w-full p-2 mb-3 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var transition-colors-theme"
+                   required>
+
+            <!-- Description Étendue -->
+            <textarea id="commit-description" placeholder="Add an optional extended description..." rows="4" 
+                      class="w-full p-2 mb-6 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var transition-colors-theme resize-none"></textarea>
+                      
+            <!-- Options de Branche -->
+            <div class="space-y-3 mb-6">
+                <!-- Option 1: Commit direct sur main -->
+                <div class="flex items-start">
+                    <input type="radio" id="commit-main" name="branch-option" value="main" checked 
+                           class="mt-1 mr-2 text-link-var focus:ring-link-var border-color-var">
+                    <label for="commit-main" class="text-sm text-color-var">
+                        <span class="material-symbols-rounded text-base mr-1 align-bottom">subdirectory_arrow_right</span>
+                        Commit directly to the <span class="font-semibold">main</span> branch.
+                    </label>
+                </div>
+
+                <!-- Option 2: Créer une nouvelle branche -->
+                <div class="flex items-start">
+                    <input type="radio" id="commit-new-branch" name="branch-option" value="new" 
+                           class="mt-1 mr-2 text-link-var focus:ring-link-var border-color-var">
+                    <label for="commit-new-branch" class="text-sm text-color-var">
+                        <span class="material-symbols-rounded text-base mr-1 align-bottom">call_split</span>
+                        Create a new branch for this commit and start a pull request. 
+                        <a href="#" class="text-link-var hover:underline ml-1">Learn more about pull requests.</a>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Boutons d'Action du Formulaire -->
+            <div class="flex items-center space-x-3">
+                <button type="submit" class="px-5 py-2 bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150 shadow-md">
+                    Commit changes
+                </button>
+                <a href="repo_files.html" class="px-5 py-2 text-secondary-var hover:text-color-var hover:bg-active-var border border-transparent rounded-lg transition duration-150">
+                    Cancel
+                </a>
+            </div>
+        </form>
+        
+    </div>
+
+    <!-- FOOTER (Simulation) -->
+    <footer class="mt-12 py-8 border-t border-color-var text-center text-sm text-secondary-var max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p>Use <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">control</kbd> + <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">shift</kbd> + <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">m</kbd> to toggle the <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">tab</kbd> key moving focus. Alternatively, use <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">esc</kbd> then <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">tab</kbd> to move to the next interactive element on the page.</p>
+        <p class="mt-4">© 2025 GitForge, Inc. · <a href="#" class="hover:text-link-var">Terms</a> · <a href="#" class="hover:text-link-var">Privacy</a></p>
+    </footer>
+
+
+    <!-- CodeMirror: Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/php/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/sql/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/shell/shell.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/typescript/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/go/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/rust/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/stex/stex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/meta.js"></script>
+
+<script>
+    // Initialisation de CodeMirror
+    let editor = null;
+    let currentMode = 'text/plain'; // Mode par défaut
+
+    const initCodeMirror = () => {
+        const textarea = document.getElementById('code-editor');
+        editor = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            mode: currentMode,
+            theme: 'monokai', // Thème Monokai pour un look sombre dans l'éditeur
+            indentUnit: 4, // 4 espaces par défaut
+            tabSize: 4,
+            lineWrapping: true, // Par défaut, on active le retour à la ligne
+            foldGutter: true,
+            extraKeys: {
+                "Ctrl-Space": "autocomplete"
+            }
+        });
+        
+        // Mettre à jour l'état du bouton commit à chaque changement dans l'éditeur
+        editor.on('change', checkContent);
+        
+        // Mettre le focus dans l'éditeur au chargement
+        editor.focus();
+    };
+    
+    // Récupération de la liste des modes disponibles pour l'auto-détection
+    const modeList = CodeMirror.modeInfo;
+
+    // Détecter le mode en fonction de l'extension du nom de fichier
+    const detectMode = (filePath) => {
+        const lastDot = filePath.lastIndexOf('.');
+        if (lastDot === -1 || lastDot === filePath.length - 1) {
+            return 'text/plain'; // Si pas d'extension ou fin de chemin
+        }
+
+        const ext = filePath.substring(lastDot + 1).toLowerCase();
+        
+        // Chercher le mode CodeMirror correspondant à l'extension
+        const modeInfo = modeList.find(info => 
+            info.ext && info.ext.includes(ext)
+        );
+
+        if (modeInfo) {
+            return modeInfo.mime || modeInfo.mode;
+        }
+        
+        return 'text/plain';
+    };
+
+    // Gestion de la logique de l'éditeur
+    const filePathInput = document.getElementById('file-path-input');
+    const commitBtn = document.getElementById('commit-changes-btn');
+    const indentSizeSelect = document.getElementById('indent-size');
+    const noWrapToggle = document.getElementById('no-wrap-toggle');
+    let isWrapped = true;
+
+    // 1. Détection du mode (coloration syntaxique)
+    filePathInput.addEventListener('input', () => {
+        const path = filePathInput.value.trim();
+        const newMode = detectMode(path);
+        
+        if (editor && newMode !== currentMode) {
+            editor.setOption('mode', newMode);
+            currentMode = newMode;
+        }
+        
+        checkContent(); // Vérifier si on peut commiter
+    });
+    
+    // 2. Vérification du contenu et activation du bouton Commit
+    const checkContent = () => {
+        const pathValid = filePathInput.value.trim().length > 0;
+        const contentValid = editor && editor.getValue().trim().length > 0;
+        
+        commitBtn.disabled = !(pathValid && contentValid);
+        // Si le bouton est activé, mettre à jour son texte si le titre du commit est vide
+        if (!commitBtn.disabled && document.getElementById('commit-title').value.trim() === '') {
+             document.getElementById('commit-title').value = `Create ${filePathInput.value.trim()}`;
+        }
+    };
+
+    // 3. Gestion de la taille d'indentation (Spaces)
+    indentSizeSelect.addEventListener('change', (e) => {
+        if (editor) {
+            const size = parseInt(e.target.value, 10);
+            editor.setOption('indentUnit', size);
+            editor.setOption('tabSize', size);
+        }
+    });
+    
+    // 4. Gestion du "No wrap" (Retour à la ligne)
+    noWrapToggle.addEventListener('click', () => {
+        isWrapped = !isWrapped;
+        editor.setOption('lineWrapping', isWrapped);
+        noWrapToggle.textContent = isWrapped ? 'No wrap' : 'Wrap';
+        noWrapToggle.classList.toggle('text-color-var', isWrapped);
+    });
+
+    // 5. Soumission du Formulaire de Commit (Simulation)
+    document.getElementById('commit-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const filePath = filePathInput.value.trim();
+        const commitTitle = document.getElementById('commit-title').value.trim();
+        const fileContent = editor ? editor.getValue() : '';
+        
+        if (!filePath || !fileContent) {
+            console.error("Nom de fichier et contenu requis.");
+            alert("Erreur: Le nom de fichier et le contenu ne peuvent pas être vides.");
+            return;
+        }
+
+        // VRAI BACKEND: Envoyer le filePath, le fileContent et les détails du commit au serveur
+        
+        console.log(`--- CRÉATION DE FICHIER ENVOYÉE ---`);
+        console.log(`Chemin: ${filePath}`);
+        console.log(`Titre du Commit: ${commitTitle}`);
+        console.log(`Contenu (début): ${fileContent.substring(0, 50)}...`);
+        
+        // Redirection vers la page de dépôt après un succès simulé
+        window.location.href = 'repo_files.html?status=file_created&path=' + encodeURIComponent(filePath);
+    });
+    
+    // 6. Gestion du bouton d'annulation principal
+    document.getElementById('cancel-changes').addEventListener('click', () => {
+        window.location.href = 'repo_files.html';
+    });
+
+
+    // Initialisation au chargement de la page
+    window.onload = initCodeMirror;
+</script>
+
+</body>
+</html>

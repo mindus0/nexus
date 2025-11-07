@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitForge | Tableau de Bord</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/7Gn3toV.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        /* Configuration de la police Inter */
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Variables de Thème et Styles (Copie du fichier repo_files.html) */
+        .transition-colors-theme { transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
+        /* Mode Sombre (Défaut) - MAINTENU POUR LES CLASSES CSS EXISTANTES MAIS NON UTILISÉ */
+        :root, .dark {
+            --bg-page: #0D1117; 
+            --bg-header: #161B22; 
+            --bg-card: #161B22; 
+            --bg-active: #30363d; 
+            --border-color: #30363d; 
+            --text-color: #E6EDF3; 
+            --text-secondary: #8B949E; 
+            --text-link: #58A6FF; 
+            --primary-color: #238636; 
+            --primary-hover: #2EA043; 
+        }
+        /* Mode Clair (Thème UNIQUE) */
+        .light {
+            --bg-page: #FFFFFF;
+            --bg-header: #F6F8FA;
+            --bg-card: #FFFFFF;
+            --bg-active: #F3F4F6;
+            --border-color: #D0D7DE;
+            --text-color: #24292F;
+            --text-secondary: #57606A;
+            --text-link: #0969DA;
+            --primary-color: #2DA44E;
+            --primary-hover: #2C974B;
+        }
+        /* Classes utilitaires pour les variables */
+        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
+        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
+        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
+        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
+        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
+        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
+        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
+        .repo-nav-link { padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-right: 0.5rem; }
+        .repo-nav-link.active { border-bottom-color: var(--text-link); color: var(--text-color) !important; font-weight: 600; }
+        
+        /* Style pour les liens de la barre latérale du Dashboard */
+        .sidebar-link {
+            display: flex; align-items: center; padding: 0.5rem; border-radius: 0.5rem; 
+            color: var(--text-secondary);
+        }
+        .sidebar-link:hover {
+            background-color: var(--bg-active);
+            color: var(--text-color);
+        }
+        .sidebar-link.active {
+            background-color: var(--bg-active);
+            color: var(--text-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body class="bg-page-var text-color-var min-h-screen transition-colors-theme flex flex-col">
+    
+    <header class="w-full bg-header-var border-b border-color-var transition-colors-theme sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
+                    <span class="text-xl font-bold text-color-var transition-colors-theme">GitForge</span>
+                    
+                    <span class="text-secondary-var hidden sm:inline">/</span>
+                    <span class="text-secondary-var text-lg font-semibold transition-colors-theme hidden sm:inline">
+                         <span id="user-context">mindus0</span>
+                    </span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="hidden sm:block">
+                        <input type="text" placeholder="Rechercher /" 
+                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 transition-colors-theme focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
+                    </div>
+                    
+                    <a href="nouveau_project.html" title="Créer un nouveau dépôt"
+                        class="inline-flex items-center px-3 py-1.5 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
+                        <span class="material-symbols-rounded text-base">add</span>
+                        <span class="hidden md:inline ml-1"> Nouveau Dépôt</span>
+                    </a>
+                    
+                    <a href="profile.html" title="Mon Profil"
+                         class="p-2 rounded-full text-color-var hover:text-link-var transition-colors-theme">
+                         <span class="material-symbols-rounded">account_circle</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full border-b border-color-var bg-page-var transition-colors-theme">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
+                    <a href="dashboard.html" class="repo-nav-link text-secondary-var hover:text-color-var active transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">home</span> Dashboard
+                    </a>
+                    <a href="upload_file.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">upload_file</span> Importer
+                    </a>
+                    <a href="a_propos.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">info</span> À Propos
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    
+    <div id="main-content" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-colors-theme w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <div class="lg:col-span-1 space-y-4">
+                <h2 class="text-lg font-semibold text-color-var border-b pb-2 border-color-var/50">Navigation Rapide</h2>
+                
+                <nav class="space-y-1 text-sm">
+                    <a href="dashboard.html" class="sidebar-link active transition-colors-theme">
+                        <span class="material-symbols-rounded text-base mr-3">view_compact</span> 
+                        Tableau de Bord
+                    </a>
+                    <a href="profile.html" class="sidebar-link transition-colors-theme">
+                        <span class="material-symbols-rounded text-base mr-3">manage_accounts</span> 
+                        Mon Profil
+                    </a>
+                    <a href="tarifs.html" class="sidebar-link transition-colors-theme">
+                        <span class="material-symbols-rounded text-base mr-3">paid</span> 
+                        Tarifs et Abonnements
+                    </a>
+                    <a href="statut.html" class="sidebar-link transition-colors-theme">
+                        <span class="material-symbols-rounded text-base mr-3">health_and_safety</span> 
+                        Statut du Système
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="lg:col-span-3 space-y-8">
+                <h1 class="text-2xl font-bold text-color-var">Bienvenue sur GitForge, mindus0 !</h1>
+                
+                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
+                    <div class="flex justify-between items-center mb-4 border-b pb-2 border-color-var/50">
+                        <h2 class="text-xl font-semibold text-color-var flex items-center">
+                            <span class="material-symbols-rounded mr-2">code_blocks</span> Vos Dépôts Récents
+                        </h2>
+                        <a href="nouveau_project.html" 
+                            class="text-sm text-link-var hover:text-link-hover-var whitespace-nowrap hidden sm:inline-flex items-center">
+                            <span class="material-symbols-rounded text-base mr-1">add</span> Créer un Nouveau Dépôt
+                        </a>
+                    </div>
+                    
+                    <div id="repositories-list" class="space-y-3">
+                        <div id="loading-repos" class="text-center p-4 text-secondary-var">
+                            <span class="material-symbols-rounded animate-spin text-2xl mb-2">progress_activity</span>
+                            <p>Chargement de vos dépôts...</p>
+                        </div>
+                        
+                        <a href="repo_files.html?repo=mailix" class="block p-3 rounded-lg border border-color-var hover:bg-active-var transition-colors-theme">
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-medium text-link-var hover:text-link-hover-var">mindus0/mailix</span>
+                                <span class="px-2 py-0.5 text-xs font-medium rounded-full border border-color-var text-secondary-var">
+                                    Private
+                                </span>
+                            </div>
+                            <p class="text-sm text-secondary-var mt-1 truncate">Un projet de démonstration pour notre plateforme GitForge.</p>
+                            <div class="flex items-center space-x-3 text-xs text-secondary-var mt-2">
+                                <span class="flex items-center">
+                                    <span class="material-symbols-rounded text-base mr-1">update</span> Mis à jour il y a 14 heures
+                                </span>
+                                <span class="flex items-center">
+                                    <span class="material-symbols-rounded text-base mr-1">star</span> 0
+                                </span>
+                            </div>
+                        </a>
+                        </div>
+                    
+                    <div id="no-repos-message" class="hidden text-center p-8">
+                        <span class="material-symbols-rounded text-6xl text-secondary-var mb-4">folder_off</span>
+                        <h3 class="text-xl font-semibold mb-2 text-color-var">Vous n'avez aucun dépôt</h3>
+                        <p class="text-secondary-var mb-4">Commencez en créant votre premier projet.</p>
+                        <a href="nouveau_project.html" 
+                            class="inline-flex items-center px-4 py-2 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
+                            <span class="material-symbols-rounded text-base mr-1">add</span> Créer un Nouveau Dépôt
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
+                    <h2 class="text-xl font-semibold text-color-var mb-4 border-b pb-2 border-color-var/50 flex items-center">
+                         <span class="material-symbols-rounded mr-2">history</span> Flux d'Activité
+                    </h2>
+                    <p class="text-secondary-var">Aucune activité récente à afficher pour le moment.</p>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <footer class="mt-auto w-full bg-header-var border-t border-color-var transition-colors-theme py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p class="text-secondary-var mb-2">&copy; 2025 GitForge, Inc.</p>
+            <nav class="space-x-4">
+                <a href="conditions_utilisation.html" class="text-link-var hover:text-link-hover-var">Conditions d'Utilisation</a>
+                <a href="mentions_legales.html" class="text-link-var hover:text-link-hover-var">Mentions Légales</a>
+                <a href="politique_confidentialite.html" class="text-link-var hover:text-link-hover-var">Confidentialité</a>
+            </nav>
+        </div>
+    </footer>
+
+
+<script>
+    // --- SIMULATION DU CHARGEMENT DES DÉPÔTS ---
+    const loadUserRepositories = () => {
+        const repositoriesList = document.getElementById('repositories-list');
+        const loadingMessage = document.getElementById('loading-repos');
+        const noReposMessage = document.getElementById('no-repos-message');
+        
+        // Simuler une requête API
+        setTimeout(() => {
+            const userRepos = [
+                // { name: "mailix", user: "mindus0", description: "Un projet de démonstration...", visibility: "Private", lastUpdate: "14 hours ago" },
+                // { name: "gitforge-docs", user: "mindus0", description: "Documentation officielle de la plateforme.", visibility: "Public", lastUpdate: "2 days ago" },
+                // Laisser le dépôt statique 'mailix' comme exemple visible pour le moment
+            ];
+            
+            // On retire le message de chargement
+            loadingMessage.classList.add('hidden');
+            
+            if (userRepos.length === 0) {
+                // Afficher le message d'absence de dépôt
+                repositoriesList.classList.add('hidden');
+                noReposMessage.classList.remove('hidden');
+            } else {
+                // Si vous aviez des dépôts dynamiques à ajouter :
+                // repositoriesList.innerHTML = userRepos.map(repo => `... template pour le dépôt ...`).join('');
+                // noReposMessage.classList.add('hidden');
+                // repositoriesList.classList.remove('hidden');
+
+                // Comme il y a le 'mailix' en statique, on s'assure que le 'no-repos-message' reste caché
+                // même avec une liste vide pour ne pas perturber l'exemple statique.
+                // Si la liste était gérée *uniquement* par JS, la logique ci-dessus s'appliquerait.
+            }
+
+        }, 500); // Délai de chargement simulé de 0.5 seconde
+    };
+
+    // Appel de la fonction au chargement de la page
+    loadUserRepositories(); 
+</script>
+</body>
+</html>

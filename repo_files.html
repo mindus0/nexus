@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitForge | Dépôt - Mon Projet</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/7Gn3toV.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        /* Configuration de la police Inter */
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Variables de Thème et Styles */
+        .transition-colors-theme { transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+
+        /* Mode Sombre (Défaut) - MAINTENU POUR LES CLASSES CSS EXISTANTES MAIS NON UTILISÉ */
+        :root, .dark {
+            --bg-page: #0D1117; /* Arrière-plan sombre de GitHub */
+            --bg-header: #161B22; /* Header sombre de GitHub */
+            --bg-card: #161B22; /* Conteneurs de fichiers */
+            --bg-active: #30363d; /* État actif/hover */
+            --border-color: #30363d; /* Bordures sombres */
+            --text-color: #E6EDF3; /* Texte clair */
+            --text-secondary: #8B949E; /* Texte secondaire */
+            --text-link: #58A6FF; /* Liens bleus */
+            --primary-color: #238636; /* Bouton principal (vert GitHub) */
+            --primary-hover: #2EA043; 
+        }
+        /* Mode Clair (DEVient le thème UNIQUE) */
+        .light {
+            --bg-page: #FFFFFF;
+            --bg-header: #F6F8FA;
+            --bg-card: #FFFFFF;
+            --bg-active: #F3F4F6;
+            --border-color: #D0D7DE;
+            --text-color: #24292F;
+            --text-secondary: #57606A;
+            --text-link: #0969DA;
+            --primary-color: #2DA44E;
+            --primary-hover: #2C974B;
+        }
+        /* Classes utilitaires pour les variables */
+        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
+        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
+        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
+        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
+        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
+        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
+        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
+
+        /* Style spécifique pour la barre de navigation */
+        .repo-nav-link { 
+            padding: 0.5rem 1rem; border-bottom: 2px solid transparent; 
+            margin-right: 0.5rem; /* Espace entre les liens */
+        }
+        .repo-nav-link.active {
+            border-bottom-color: var(--text-link);
+            color: var(--text-color) !important;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body class="bg-page-var text-color-var min-h-screen transition-colors-theme">
+    
+    <header class="w-full bg-header-var border-b border-color-var transition-colors-theme sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
+                    <span class="text-xl font-bold text-color-var transition-colors-theme">GitForge</span>
+                    <span class="text-secondary-var">/</span>
+                    <a href="#" class="text-color-var hover:text-link-var text-lg font-semibold transition-colors-theme">
+                        <span id="repo-user">mindus0</span> / <span id="repo-name">mailix</span>
+                    </a>
+                    <span class="px-2 py-0.5 text-xs font-medium rounded-full border border-color-var text-secondary-var">
+                        Private
+                    </span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="hidden sm:block">
+                        <input type="text" placeholder="Type / to search" 
+                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 transition-colors-theme focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
+                    </div>
+                    <button class="p-2 rounded-full text-color-var hover:text-link-var transition-colors-theme">
+                         <span class="material-symbols-rounded">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full border-b border-color-var bg-page-var transition-colors-theme">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var active transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">code</span> Code
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">bug_report</span> Issues (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">merge</span> Pull requests (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">checklist</span> Actions
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">lock</span> Security
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">insights</span> Insights
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">settings</span> Settings
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    
+    <div id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-colors-theme">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center px-3 py-1.5 text-sm bg-card-var border border-color-var rounded-lg text-color-var hover:bg-active-var transition-colors-theme">
+                    <span class="material-symbols-rounded text-base mr-1">git_branch</span>
+                    <span class="font-semibold">main</span>
+                    <span class="material-symbols-rounded text-base ml-2">arrow_drop_down</span>
+                </button>
+                <span class="text-sm text-secondary-var">1 Branch</span>
+                <span class="text-sm text-secondary-var">0 Tags</span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button class="px-3 py-1.5 text-sm bg-card-var border border-color-var rounded-lg text-color-var hover:bg-active-var transition-colors-theme hidden sm:inline-flex items-center">
+                    Go to file
+                </button>
+                
+                <div class="relative inline-block text-left">
+                    <button id="add-file-toggle" class="inline-flex items-center px-3 py-1.5 text-sm bg-card-var border border-color-var rounded-lg text-color-var hover:bg-active-var transition-colors-theme">
+                        <span class="material-symbols-rounded text-base mr-1">add</span> Add file
+                        <span class="material-symbols-rounded text-base ml-1">arrow_drop_down</span>
+                    </button>
+                    
+                    <div id="add-file-menu" class="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-card-var ring-1 ring-border-color-var focus:outline-none z-50 transition-colors-theme">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="add-file-toggle">
+                            <a href="create_new_file.html" class="flex items-center px-4 py-2 text-sm text-color-var hover:bg-active-var transition-colors-theme" role="menuitem">
+                                <span class="material-symbols-rounded mr-3 text-base">create_new_folder</span> Créer un Nouveau Fichier
+                            </a>
+                            <a href="upload_file.html" class="flex items-center px-4 py-2 text-sm text-color-var hover:bg-active-var transition-colors-theme" role="menuitem">
+                                <span class="material-symbols-rounded mr-3 text-base">upload_file</span> Importer un Fichier Existant
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="inline-flex items-center px-3 py-1.5 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
+                    <span class="material-symbols-rounded text-base mr-1">code</span> Code
+                    <span class="material-symbols-rounded text-base ml-2">arrow_drop_down</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 space-y-6">
+                
+                <div id="file-list-container" class="bg-card-var rounded-lg border border-color-var transition-colors-theme min-h-[100px]">
+                    
+                    <div class="flex items-center p-3 border-b border-color-var">
+                        <span class="material-symbols-rounded text-lg text-secondary-var mr-3">account_circle</span>
+                        
+                        <div class="flex flex-col sm:flex-row sm:items-center w-full justify-between">
+                             <a href="#" class="text-sm font-semibold text-color-var hover:text-link-var">mindus0</a> 
+                             <span class="text-sm text-secondary-var truncate mr-2 ml-2">Add files via upload</span>
+                             <a href="#" class="text-sm text-link-var hover:text-link-hover-var whitespace-nowrap ml-auto">
+                                a6d9283
+                            </a>
+                            <span class="text-xs text-secondary-var ml-2 whitespace-nowrap hidden sm:inline">
+                                14 hours ago
+                            </span>
+                             <a href="#" class="text-sm text-link-var hover:text-link-hover-var whitespace-nowrap ml-4">
+                                <span class="material-symbols-rounded text-base mr-1">history</span> 2 Commits
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div id="empty-repo-message" class="hidden text-center p-8">
+                        <span class="material-symbols-rounded text-6xl text-secondary-var mb-4">folder_off</span>
+                        <h2 class="text-xl font-semibold mb-2 text-color-var">Ce dépôt est vide</h2>
+                        <p class="text-secondary-var mb-6">Ajoutez votre premier fichier pour commencer votre projet.</p>
+                    </div>
+                    
+                    <table id="file-table" class="min-w-full divide-y divide-color-var">
+                        <tbody id="file-table-body" class="divide-y divide-color-var/50 text-sm">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
+                    <h3 class="text-lg font-semibold text-color-var mb-4 border-b pb-2 border-color-var/50">README.md</h3>
+                    <p class="text-secondary-var leading-relaxed">
+                        Bienvenue sur le dépôt mindus0/mailix ! <br>
+                        Ce projet est la base de notre plateforme GitForge.
+                    </p>
+                    <pre class="mt-4 bg-page-var p-3 rounded text-sm overflow-x-auto border border-color-var/50 text-color-var">
+# mailix
+Un projet de démonstration pour notre plateforme GitForge.
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-card-var p-4 rounded-lg border border-color-var transition-colors-theme">
+                    <h3 class="text-md font-semibold text-color-var mb-3">About</h3>
+                    <p class="text-sm text-secondary-var mb-4">
+                        mailix for developers
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center text-secondary-var">
+                            <span class="material-symbols-rounded text-base mr-2">book</span> Readme
+                        </li>
+                        <li class="flex items-center text-secondary-var">
+                            <span class="material-symbols-rounded text-base mr-2">policy</span> Apache-2.0 license
+                        </li>
+                        <li class="flex items-center text-secondary-var">
+                            <span class="material-symbols-rounded text-base mr-2">visibility</span> 0 watching
+                        </li>
+                        <li class="flex items-center text-secondary-var">
+                            <span class="material-symbols-rounded text-base mr-2">star</span> 0 stars
+                        </li>
+                        <li class="flex items-center text-secondary-var">
+                            <span class="material-symbols-rounded text-base mr-2">fork_right</span> 0 forks
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-card-var p-4 rounded-lg border border-color-var transition-colors-theme">
+                    <h3 class="text-md font-semibold text-color-var mb-3">Releases</h3>
+                    <p class="text-sm text-secondary-var">No releases published</p>
+                    <a href="#" class="text-sm text-link-var hover:text-link-hover-var mt-2 block">
+                        Create a new release
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+<script>
+    // --- FIREBASE SETUP (MANDATORY for state persistence) ---
+    // Note: Since this is a file repository app, we will use a simulation 
+    // for file data storage in the front-end for now, as planned. 
+    // The backend update is planned for later.
+    // The necessary Firestore variables are included for later integration:
+    // const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    // const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+    // const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+
+    // LOGIQUE SPÉCIFIQUE À LA PAGE DU DÉPÔT
+    
+    const fileTableBody = document.getElementById('file-table-body');
+    const repoTitle = document.getElementById('repo-name');
+    
+    // Fonction pour récupérer le nom du dépôt de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const repoName = urlParams.get('repo') || "mailix";
+    repoTitle.textContent = repoName;
+
+    // Logique du menu "Ajouter un Fichier"
+    const addFileToggle = document.getElementById('add-file-toggle');
+    const addFileMenu = document.getElementById('add-file-menu');
+
+    const toggleMenu = (event) => {
+        event.stopPropagation();
+        addFileMenu.classList.toggle('hidden');
+    };
+    
+    addFileToggle.addEventListener('click', toggleMenu);
+
+    // Fermer le menu si l'on clique à l'extérieur
+    document.addEventListener('click', (event) => {
+        if (!addFileMenu.contains(event.target) && !addFileToggle.contains(event.target)) {
+            addFileMenu.classList.add('hidden');
+        }
+    });
+
+    // SIMULATION de chargement des fichiers (basé sur l'image fournie)
+    const loadFiles = () => {
+        // Cette liste simule les fichiers que le backend renverrait
+        const filesFromApi = [
+            { name: "LICENSE", icon: "policy", color: "text-link-var", commit: "Initial commit", time: "yesterday", path: "license" },
+            { name: "README.md", icon: "description", color: "text-secondary-var", commit: "Initial commit", time: "yesterday", path: "readme.md" },
+            { name: "a_propos.html", icon: "html", color: "text-link-var", commit: "Add files via upload", time: "14 hours ago", path: "a_propos.html" },
+            { name: "checkout.util.html", icon: "html", color: "text-link-var", commit: "Add files via upload", time: "14 hours ago", path: "checkout.util.html" },
+            { name: "conditions_utilisation.html", icon: "html", color: "text-link-var", commit: "Add files via upload", time: "14 hours ago", path: "conditions_utilisation.html" },
+            { name: "connexion.html", icon: "html", color: "text-link-var", commit: "Add files via upload", time: "14 hours ago", path: "connexion.html" },
+            { name: "dashboard.html", icon: "html", color: "text-link-var", commit: "Add files via upload", time: "14 hours ago", path: "dashboard.html" },
+            { name: "main.js", icon: "javascript", color: "text-link-var", commit: "Fix dark mode bug", time: "3 hours ago", path: "main.js" }
+        ];
+
+        fileTableBody.innerHTML = ''; // Nettoyer la table
+        
+        if (filesFromApi.length === 0) {
+            document.getElementById('empty-repo-message').classList.remove('hidden');
+            document.getElementById('file-table').classList.add('hidden');
+        } else {
+            document.getElementById('empty-repo-message').classList.add('hidden');
+            document.getElementById('file-table').classList.remove('hidden');
+            
+            filesFromApi.forEach(file => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-active-var transition-colors-theme cursor-pointer';
+                row.innerHTML = `
+                    <td class="px-3 py-2 sm:px-4 sm:py-3 whitespace-nowrap w-2/5">
+                        <div class="flex items-center">
+                            <span class="material-symbols-rounded text-lg mr-2 align-middle ${file.color}">${file.icon}</span> 
+                            <a href="editor.html?file=${file.path}" class="text-sm font-medium text-color-var hover:text-link-var">
+                                ${file.name}
+                            </a>
+                        </div>
+                    </td>
+                    <td class="px-3 py-2 sm:px-4 sm:py-3 whitespace-nowrap text-sm text-secondary-var w-2/5">
+                        <span class="truncate block max-w-xs">${file.commit}</span>
+                    </td>
+                    <td class="px-3 py-2 sm:px-4 sm:py-3 whitespace-nowrap text-sm text-secondary-var text-right w-1/5">
+                         ${file.time}
+                    </td>
+                `;
+                // Rendre toute la ligne cliquable pour une meilleure UX
+                row.addEventListener('click', (e) => {
+                    // Empêcher l'événement si on clique sur un lien déjà existant à l'intérieur
+                    if (e.target.tagName !== 'A') {
+                        window.location.href = `editor.html?file=${file.path}`;
+                    }
+                });
+                fileTableBody.appendChild(row);
+            });
+        }
+    };
+
+    // Appeler la fonction au chargement de la page
+    loadFiles(); 
+</script>
+</body>
+</html>

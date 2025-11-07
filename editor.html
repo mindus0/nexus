@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitForge | mindus0/mailix - Modifier a_propos.html</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/7Gn3toV.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    
+    <style>
+        /* Configuration de la police Inter */
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Variables de Thème (Mode Clair forcé pour le style GitHub) */
+        :root {
+            --bg-page: #FFFFFF;
+            --bg-header: #F6F8FA;
+            --bg-card: #FFFFFF;
+            --bg-active: #F3F4F6; 
+            --border-color: #D0D7DE; 
+            --text-color: #24292F; 
+            --text-secondary: #57606A;
+            --text-link: #0969DA; 
+            --primary-color: #2DA44E; /* Bouton Commit (Vert) */
+            --primary-hover: #2C974B; 
+        }
+
+        /* Classes utilitaires pour les variables */
+        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
+        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
+        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
+        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
+        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
+        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
+        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
+
+        /* Style spécifique pour la barre de navigation */
+        .repo-nav-link { padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-right: 0.5rem; }
+        .repo-nav-link.active { border-bottom-color: var(--text-link); color: var(--text-color) !important; font-weight: 600; }
+        
+        /* Ajustements CodeMirror pour qu'il remplisse l'espace */
+        .CodeMirror {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            height: 500px; /* Hauteur fixe pour l'édition */
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* Styles pour la barre latérale de fichiers */
+        .sidebar {
+            width: 250px; /* Largeur fixe comme dans GitHub */
+            min-height: calc(100vh - 64px); /* Hauteur de l'écran moins la barre de navigation principale */
+            border-right: 1px solid var(--border-color);
+            background-color: var(--bg-card); /* Fond blanc pour la barre latérale */
+            position: sticky;
+            top: 0; /* Pour qu'elle reste fixe */
+            padding-top: 0;
+            overflow-y: auto; /* Scroll si trop de fichiers */
+        }
+        
+        .file-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .file-item.active {
+            background-color: var(--bg-active);
+            font-weight: 600;
+            border-left: 3px solid var(--text-link);
+            color: var(--text-color);
+        }
+
+        /* Ajustement de la hauteur CodeMirror et de la barre latérale pour la barre d'onglets au-dessus */
+        .main-content-area {
+            display: flex;
+            min-height: calc(100vh - 120px); /* Ajuster la hauteur restante */
+        }
+
+        .editor-view {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+
+    </style>
+</head>
+
+<body class="bg-page-var text-color-var min-h-screen transition-colors-theme">
+    
+    <header class="w-full bg-header-var border-b border-color-var sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
+                    <span class="text-xl font-bold text-color-var">GitForge</span>
+                    <span class="text-secondary-var">/</span>
+                    <a href="repo_files.html" class="text-color-var hover:text-link-var text-lg font-semibold">
+                        <span id="repo-user">mindus0</span> / <span id="repo-name">mailix</span>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="hidden sm:block">
+                        <input type="text" placeholder="Type / to search" 
+                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
+                    </div>
+                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
+                        <span class="material-symbols-rounded">notifications</span>
+                    </button>
+                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
+                        <span class="material-symbols-rounded">add</span>
+                    </button>
+                    <button class="p-2 rounded-full text-secondary-var hover:text-color-var">
+                         <span class="material-symbols-rounded">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full border-b border-color-var bg-page-var">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
+                    <a href="repo_files.html" class="repo-nav-link text-secondary-var hover:text-color-var active flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">code</span> Code
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">bug_report</span> Issues (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">merge</span> Pull requests (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">checklist</span> Actions
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    
+    <div class="max-w-7xl mx-auto">
+        <div class="flex main-content-area">
+            
+            <aside class="sidebar bg-page-var">
+                <div class="p-4 border-b border-color-var flex items-center justify-between sticky top-0 bg-page-var">
+                    <span class="text-sm font-semibold text-color-var">Files</span>
+                    <button class="text-secondary-var hover:text-link-var">
+                        <span class="material-symbols-rounded text-lg">add</span>
+                    </button>
+                </div>
+                
+                <div class="p-2 border-b border-color-var">
+                    <input type="text" placeholder="Go to file..." 
+                           class="w-full p-1.5 text-sm border border-color-var rounded-lg focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var bg-page-var text-color-var">
+                </div>
+
+                <nav id="file-list">
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> LICENSE
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> README.md
+                    </div>
+                    <div class="file-item active text-color-var">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> a_propos.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> checkout.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> conditions_utilisation.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> connexion.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> create_project.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> dashboard.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> documentation.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> html_launcher.html
+                    </div>
+                    <div class="file-item text-secondary-var hover:bg-active-var border-l-2 border-transparent">
+                        <span class="material-symbols-rounded text-lg mr-2">draft</span> index.html
+                    </div>
+                </nav>
+            </aside>
+            
+            <div id="editor-view" class="editor-view flex-grow">
+                
+                <div class="flex items-center space-x-2 mb-6 text-sm font-semibold">
+                    <span class="text-color-var">
+                        <span class="material-symbols-rounded text-lg align-bottom mr-1">folder</span>
+                        <a href="repo_files.html" class="text-link-var hover:text-link-hover-var">mailix</a> / 
+                        <span id="current-file-path" class="font-bold">a_propos.html</span>
+                    </span>
+                    
+                    <span class="inline-flex items-center px-3 py-1 bg-active-var text-color-var rounded-lg ml-3">
+                        <span class="material-symbols-rounded text-sm mr-1">git_branch</span>
+                        main
+                    </span>
+                    
+                    <div class="ml-auto flex space-x-3">
+                        <button id="cancel-changes" type="button" class="px-3 py-1.5 text-secondary-var hover:text-color-var hover:bg-active-var border border-transparent rounded-lg transition duration-150">
+                            Cancel
+                        </button>
+                        <button type="submit" id="propose-changes-btn" class="px-4 py-1.5 bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150 shadow-md disabled:opacity-50" disabled>
+                            Propose changes
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center border border-color-var border-b-0 rounded-t-lg bg-header-var px-4 py-2">
+                    <div class="flex space-x-4">
+                        <button class="flex items-center font-semibold text-color-var border-b-2 border-text-color pb-1">Edit</button>
+                        <button class="flex items-center text-secondary-var hover:text-color-var hover:border-b-2 hover:border-text-secondary pb-1">Preview</button>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 text-sm text-secondary-var">
+                        <span class="hidden sm:inline-block">mindus0 modified the file 16 hours ago</span>
+                        <span class="hidden sm:inline-block">|</span>
+                        
+                        <span id="space-option" class="inline-flex items-center space-x-1">
+                            <span>Spaces</span>
+                            <select id="indent-size" class="bg-active-var p-0.5 rounded text-color-var border-none focus:ring-link-var">
+                                <option value="2">2</option>
+                                <option value="4" selected>4</option>
+                                <option value="8">8</option>
+                            </select>
+                        </span>
+                        <span class="hidden sm:inline-block">|</span>
+                        <button id="no-wrap-toggle" class="hover:text-color-var">No wrap</button>
+                    </div>
+                </div>
+                
+                <div id="editor-container">
+                    <textarea id="code-editor" name="code">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos de Nexus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Transition pour un effet doux lors du changement de thème */
+        transition: background-color 0.3s, color 0.3s;
+    </style>
+</head>
+<body>
+    <h1>Ceci est la page À Propos</h1>
+    <p>Simuler la modification de ce contenu.</p>
+</body>
+</html>
+</textarea>
+                </div>
+        
+                <form id="commit-form" class="bg-card-var p-6 rounded-lg border border-color-var shadow-lg mt-8">
+                    <h2 class="text-lg font-semibold text-color-var mb-4">Commit changes</h2>
+                    
+                    <input type="text" id="commit-title" placeholder="Update a_propos.html" value="Update a_propos.html"
+                           class="w-full p-2 mb-3 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var transition-colors-theme"
+                           required>
+        
+                    <textarea id="commit-description" placeholder="Add an optional extended description..." rows="4" 
+                              class="w-full p-2 mb-6 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var transition-colors-theme resize-none"></textarea>
+                              
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start">
+                            <input type="radio" id="commit-main" name="branch-option" value="main" checked 
+                                   class="mt-1 mr-2 text-link-var focus:ring-link-var border-color-var">
+                            <label for="commit-main" class="text-sm text-color-var">
+                                <span class="material-symbols-rounded text-base mr-1 align-bottom">subdirectory_arrow_right</span>
+                                Commit directly to the <span class="font-semibold">main</span> branch.
+                            </label>
+                        </div>
+        
+                        <div class="flex items-start">
+                            <input type="radio" id="commit-new-branch" name="branch-option" value="new" 
+                                   class="mt-1 mr-2 text-link-var focus:ring-link-var border-color-var">
+                            <label for="commit-new-branch" class="text-sm text-color-var">
+                                <span class="material-symbols-rounded text-base mr-1 align-bottom">call_split</span>
+                                Create a new branch for this commit and start a pull request. 
+                                <a href="#" class="text-link-var hover:underline ml-1">Learn more about pull requests.</a>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="flex items-center space-x-3">
+                        <button type="submit" class="px-5 py-2 bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150 shadow-md">
+                            Propose changes
+                        </button>
+                        <a href="repo_files.html" class="px-5 py-2 text-secondary-var hover:text-color-var hover:bg-active-var border border-transparent rounded-lg transition duration-150">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <footer class="mt-12 py-8 border-t border-color-var text-center text-sm text-secondary-var max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p>Use <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">control</kbd> + <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">shift</kbd> + <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">m</kbd> to toggle the <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">tab</kbd> key moving focus. Alternatively, use <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">esc</kbd> then <kbd class="px-1 py-0.5 border border-color-var rounded bg-active-var text-color-var text-xs">tab</kbd> to move to the next interactive element on the page.</p>
+        <p class="mt-4">© 2025 GitForge, Inc. · <a href="#" class="hover:text-link-var">Terms</a> · <a href="#" class="hover:text-link-var">Privacy</a></p>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/php/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/sql/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/shell/shell.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/typescript/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/go/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/rust/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/stex/stex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/meta.js"></script>
+
+<script>
+    // Initialisation de CodeMirror
+    let editor = null;
+    // On commence avec 'htmlmixed' car le fichier actif simulé est 'a_propos.html'
+    let currentMode = 'htmlmixed'; 
+    const initialFilePath = 'a_propos.html';
+
+    const initCodeMirror = () => {
+        const textarea = document.getElementById('code-editor');
+        editor = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            mode: currentMode,
+            theme: 'monokai', // Thème Monokai pour l'éditeur
+            indentUnit: 4, // 4 espaces
+            tabSize: 4,
+            lineWrapping: true, // Par défaut, on active le retour à la ligne
+            foldGutter: true,
+            extraKeys: {
+                "Ctrl-Space": "autocomplete"
+            }
+        });
+        
+        // Mettre à jour l'état du bouton "Propose changes" à chaque changement dans l'éditeur
+        editor.on('change', checkContent);
+        
+        // Mettre le focus dans l'éditeur au chargement
+        editor.focus();
+    };
+    
+    // Fonction de vérification (simplifiée pour l'édition)
+    const checkContent = () => {
+        const contentHasChanged = editor && editor.isClean() === false; 
+        const proposeBtn = document.getElementById('propose-changes-btn');
+        
+        // Active le bouton si le contenu a été modifié
+        proposeBtn.disabled = !contentHasChanged;
+    };
+
+    // Gestion de la taille d'indentation (Spaces)
+    const indentSizeSelect = document.getElementById('indent-size');
+    indentSizeSelect.addEventListener('change', (e) => {
+        if (editor) {
+            const size = parseInt(e.target.value, 10);
+            editor.setOption('indentUnit', size);
+            editor.setOption('tabSize', size);
+        }
+    });
+    
+    // Gestion du "No wrap" (Retour à la ligne)
+    const noWrapToggle = document.getElementById('no-wrap-toggle');
+    let isWrapped = true;
+    noWrapToggle.addEventListener('click', () => {
+        isWrapped = !isWrapped;
+        editor.setOption('lineWrapping', isWrapped);
+        noWrapToggle.textContent = isWrapped ? 'No wrap' : 'Wrap';
+        noWrapToggle.classList.toggle('text-color-var', !isWrapped); // Inverse le style de texte
+    });
+
+    // Soumission du Formulaire de Commit (Simulation)
+    document.getElementById('commit-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const commitTitle = document.getElementById('commit-title').value.trim();
+        const fileContent = editor ? editor.getValue() : '';
+        
+        // VRAI BACKEND: Envoyer le fichier (initialFilePath), le fileContent et les détails du commit au serveur
+        
+        console.log(`--- MODIFICATION DE FICHIER ENVOYÉE ---`);
+        console.log(`Fichier: ${initialFilePath}`);
+        console.log(`Titre du Commit: ${commitTitle}`);
+        console.log(`Contenu (début): ${fileContent.substring(0, 50)}...`);
+        
+        // Redirection vers la page de dépôt après un succès simulé
+        window.location.href = 'repo_files.html?status=file_updated&path=' + encodeURIComponent(initialFilePath);
+    });
+    
+    // Gestion du bouton d'annulation principal
+    document.getElementById('cancel-changes').addEventListener('click', () => {
+        window.location.href = 'repo_files.html';
+    });
+
+
+    // Initialisation au chargement de la page
+    window.onload = initCodeMirror;
+</script>
+
+</body>
+</html>

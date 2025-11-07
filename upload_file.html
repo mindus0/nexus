@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitForge | Importer des Fichiers</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/7Gn3toV.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        /* Configuration de la police Inter */
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Variables de Thème (Mode Clair forcé pour cette page) */
+        :root {
+            --bg-page: #FFFFFF;
+            --bg-header: #F6F8FA;
+            --bg-card: #FFFFFF;
+            --bg-active: #F3F4F6; 
+            --border-color: #D0D7DE; 
+            --text-color: #24292F; 
+            --text-secondary: #57606A;
+            --text-link: #0969DA; 
+            --primary-color: #2DA44E; /* Bouton Commit (Vert) */
+            --primary-hover: #2C974B; 
+            --dropzone-bg: #F6F8FA;
+        }
+
+        /* Classes utilitaires pour les variables */
+        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
+        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
+        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
+        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
+        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
+        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
+        .bg-dropzone-var { background-color: var(--dropzone-bg); }
+        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
+
+        /* Style spécifique pour la barre de navigation */
+        .repo-nav-link { padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-right: 0.5rem; }
+        .repo-nav-link.active { border-bottom-color: var(--text-link); color: var(--text-color) !important; font-weight: 600; }
+        
+        /* Styles pour la zone de glisser-déposer */
+        #drop-area { transition: border-color 0.2s, background-color 0.2s; }
+        .drag-over { border-color: var(--text-link) !important; background-color: var(--bg-active) !important; }
+    </style>
+</head>
+
+<body class="bg-page-var text-color-var min-h-screen transition-colors-theme">
+    
+    <!-- BARRE DE NAVIGATION SUPÉRIEURE (HEADER) -->
+    <header class="w-full bg-header-var border-b border-color-var sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo et Nom du Dépôt -->
+                <div class="flex items-center space-x-4">
+                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
+                    <span class="text-xl font-bold text-color-var">GitForge</span>
+                    <span class="text-secondary-var">/</span>
+                    <a href="repo_files.html" class="text-color-var hover:text-link-var text-lg font-semibold">
+                        <span id="repo-user">mindus0</span> / <span id="repo-name">mailix</span>
+                    </a>
+                </div>
+                
+                <!-- Barre de Recherche et Boutons d'Action Rapide -->
+                <div class="flex items-center space-x-3">
+                    <div class="hidden sm:block">
+                        <input type="text" placeholder="Type / to search" 
+                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
+                    </div>
+                    <!-- Boutons d'action rapide (simulés) -->
+                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
+                        <span class="material-symbols-rounded">notifications</span>
+                    </button>
+                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
+                        <span class="material-symbols-rounded">add</span>
+                    </button>
+                    <button class="p-2 rounded-full text-secondary-var hover:text-color-var">
+                         <span class="material-symbols-rounded">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BARRE DE NAVIGATION SECONDAIRE (ONGLETS DE DÉPÔT) -->
+        <div class="w-full border-b border-color-var bg-page-var">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
+                    <a href="repo_files.html" class="repo-nav-link text-secondary-var hover:text-color-var active flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">code</span> Code
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">bug_report</span> Issues (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">merge</span> Pull requests (0)
+                    </a>
+                    <a href="#" class="repo-nav-link text-secondary-var hover:text-color-var flex items-center">
+                        <span class="material-symbols-rounded text-base mr-1">checklist</span> Actions
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    
+    <div id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Chemin de Fichier (Breadcrumb) -->
+        <h1 class="text-xl font-light text-secondary-var mb-6">
+            <a href="repo_files.html" class="text-link-var hover:text-link-hover-var">mailix</a> / 
+            <span class="text-color-var">Ajouter des fichiers via import</span>
+        </h1>
+        
+        <!-- ZONE DE GLISSER-DÉPOSER -->
+        <div id="drop-area" class="bg-dropzone-var border-2 border-dashed border-color-var rounded-lg p-16 text-center mb-8 hover:border-text-link hover:bg-active-var transition-colors-theme">
+            <span class="material-symbols-rounded text-6xl text-secondary-var mx-auto mb-4">description</span>
+            <p class="text-lg font-semibold text-color-var mb-2">
+                Glissez des fichiers additionnels ici pour les ajouter à votre dépôt
+            </p>
+            <p class="text-sm text-secondary-var">
+                Ou <label for="file-upload" class="text-link-var cursor-pointer hover:underline">choisissez vos fichiers</label>
+            </p>
+            <input type="file" id="file-upload" multiple class="hidden" accept="*/*">
+        </div>
+
+        <!-- LISTE DES FICHIERS EN ATTENTE D'IMPORTATION -->
+        <div id="file-list" class="space-y-4 mb-10">
+            <!-- Les fichiers ajoutés seront insérés ici par JS -->
+            <!-- Simulation de fichiers ajoutés comme dans l'image -->
+            <div id="file-index" class="file-item flex justify-between items-center p-4 border border-color-var rounded-lg bg-card-var shadow-sm">
+                <div class="flex items-center text-sm font-medium">
+                     <span class="material-symbols-rounded text-lg mr-3 text-secondary-var">description</span>
+                     <span class="text-color-var">index.html</span>
+                </div>
+                <button data-file-id="file-index" class="remove-file-btn text-secondary-var hover:text-red-600 transition">
+                    <span class="material-symbols-rounded text-lg">close</span>
+                </button>
+            </div>
+            <div id="file-inscription" class="file-item flex justify-between items-center p-4 border border-color-var rounded-lg bg-card-var shadow-sm">
+                <div class="flex items-center text-sm font-medium">
+                     <span class="material-symbols-rounded text-lg mr-3 text-secondary-var">description</span>
+                     <span class="text-color-var">inscription.html</span>
+                </div>
+                <button data-file-id="file-inscription" class="remove-file-btn text-secondary-var hover:text-red-600 transition">
+                    <span class="material-symbols-rounded text-lg">close</span>
+                </button>
+            </div>
+            <div id="file-mentions" class="file-item flex justify-between items-center p-4 border border-color-var rounded-lg bg-card-var shadow-sm">
+                <div class="flex items-center text-sm font-medium">
+                     <span class="material-symbols-rounded text-lg mr-3 text-secondary-var">description</span>
+                     <span class="text-color-var">mentions_legales.html</span>
+                </div>
+                <button data-file-id="file-mentions" class="remove-file-btn text-secondary-var hover:text-red-600 transition">
+                    <span class="material-symbols-rounded text-lg">close</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SECTION DE COMMIT -->
+        <form id="commit-form" class="bg-card-var p-6 rounded-lg border border-color-var shadow-lg">
+            <h2 class="text-lg font-semibold text-color-var mb-4">Commit changes</h2>
+            
+            <!-- Titre du Commit -->
+            <input type="text" id="commit-title" placeholder="Add files via upload" 
+                   class="w-full p-2 mb-3 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var transition-colors-theme"
+                   required>
+
+            <!-- Description Étendue -->
+            <textarea id="commit-description" placeholder="Add an optional extended description..." rows="4" 
+                      class="w-full p-2 mb-6 border border-color-var rounded-lg focus:outline-none focus:ring-2 focus:ring-link-var bg-page-var text-color-var transition-colors-theme resize-none"></textarea>
+                      
+            <!-- Options de Branche -->
+            <div class="space-y-3 mb-6">
+                <!-- Option 1: Commit direct sur main -->
+                <div class="flex items-start">
+                    <input type="radio" id="commit-main" name="branch-option" value="main" checked 
+                           class="mt-1 mr-2 text-link-var focus:ring-link-var border-color-var">
+                    <label for="commit-main" class="text-sm text-color-var">
+                        <span class="material-symbols-rounded text-base mr-1 align-bottom">subdirectory_arrow_right</span>
+                        Commit directly to the <span class="font-semibold">main</span> branch.
+                    </label>
+                </div>
+
+                <!-- Option 2: Créer une nouvelle branche -->
+                <div class="flex items-start">
+                    <input type="radio" id="commit-new-branch" name="branch-option" value="new" 
+                           class="mt-1 mr-2 text-link-var focus:ring-link-var border-color-var">
+                    <label for="commit-new-branch" class="text-sm text-color-var">
+                        <span class="material-symbols-rounded text-base mr-1 align-bottom">call_split</span>
+                        Create a new branch for this commit and start a pull request. 
+                        <a href="#" class="text-link-var hover:underline ml-1">Learn more about pull requests.</a>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Boutons d'Action -->
+            <div class="flex items-center space-x-3">
+                <button type="submit" class="px-5 py-2 bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150 shadow-md">
+                    Commit changes
+                </button>
+                <a href="repo_files.html" class="px-5 py-2 text-secondary-var hover:text-color-var hover:bg-active-var border border-transparent rounded-lg transition duration-150">
+                    Cancel
+                </a>
+            </div>
+        </form>
+        
+    </div>
+
+    <!-- FOOTER (Simulation) -->
+    <footer class="mt-12 py-8 border-t border-color-var text-center text-sm text-secondary-var max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p>© 2025 GitForge, Inc. · <a href="#" class="hover:text-link-var">Terms</a> · <a href="#" class="hover:text-link-var">Privacy</a> · <a href="#" class="hover:text-link-var">Security</a> · <a href="#" class="hover:text-link-var">Status</a></p>
+    </footer>
+
+<script>
+    // --- FIREBASE SETUP ---
+    // Les variables Firebase sont incluses ici pour la compatibilité, 
+    // mais le code de connexion/initialisation réel est omis pour l'instant
+    // car le backend est une étape ultérieure.
+
+    // Variables du DOM
+    const dropArea = document.getElementById('drop-area');
+    const fileUpload = document.getElementById('file-upload');
+    const fileListContainer = document.getElementById('file-list');
+    const commitForm = document.getElementById('commit-form');
+    
+    // État de la liste de fichiers (simulation)
+    let pendingFiles = [
+        { id: 'file-index', name: 'index.html' },
+        { id: 'file-inscription', name: 'inscription.html' },
+        { id: 'file-mentions', name: 'mentions_legales.html' }
+    ];
+
+    // --- Fonctions d'interaction avec les fichiers ---
+
+    // 1. Mise à jour de la liste de fichiers dans le DOM
+    const renderFileList = () => {
+        fileListContainer.innerHTML = ''; // Nettoyer l'ancien contenu
+        
+        pendingFiles.forEach(file => {
+            const fileItem = document.createElement('div');
+            fileItem.id = file.id;
+            fileItem.className = 'file-item flex justify-between items-center p-4 border border-color-var rounded-lg bg-card-var shadow-sm';
+            fileItem.innerHTML = `
+                <div class="flex items-center text-sm font-medium">
+                     <span class="material-symbols-rounded text-lg mr-3 text-secondary-var">description</span>
+                     <span class="text-color-var">${file.name}</span>
+                </div>
+                <button data-file-id="${file.id}" class="remove-file-btn text-secondary-var hover:text-red-600 transition">
+                    <span class="material-symbols-rounded text-lg">close</span>
+                </button>
+            `;
+            fileListContainer.appendChild(fileItem);
+        });
+        
+        // Rattacher les écouteurs de suppression
+        document.querySelectorAll('.remove-file-btn').forEach(button => {
+            button.addEventListener('click', removeFile);
+        });
+    };
+    
+    // 2. Ajout de fichiers
+    const addFiles = (files) => {
+        Array.from(files).forEach(file => {
+            // Créer un ID unique pour le suivi
+            const fileId = 'file-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+            pendingFiles.push({ id: fileId, name: file.name, fileObject: file });
+        });
+        renderFileList();
+    };
+
+    // 3. Suppression de fichiers
+    const removeFile = (event) => {
+        const fileIdToRemove = event.currentTarget.dataset.fileId;
+        pendingFiles = pendingFiles.filter(file => file.id !== fileIdToRemove);
+        renderFileList();
+    };
+
+    // --- Logique du Drag and Drop ---
+    
+    // Empêcher les comportements par défaut (nécessaire pour le drag/drop)
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // Mettre en évidence la zone de dépôt
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => dropArea.classList.add('drag-over'), false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => dropArea.classList.remove('drag-over'), false);
+    });
+    
+    // Gérer le dépôt des fichiers
+    dropArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        addFiles(files);
+    }
+    
+    // Gérer l'ajout via le clic sur "choisissez vos fichiers"
+    fileUpload.addEventListener('change', (e) => {
+        addFiles(e.target.files);
+        // Réinitialiser l'input pour pouvoir re-sélectionner le même fichier
+        e.target.value = null; 
+    });
+
+    // Gérer la soumission du formulaire de commit (Simulation)
+    commitForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const commitTitle = document.getElementById('commit-title').value || "Add files via upload";
+        const commitDesc = document.getElementById('commit-description').value;
+        const branchOption = document.querySelector('input[name="branch-option"]:checked').value;
+
+        // VRAI BACKEND: Envoyer les fichiers (pendingFiles) + le message de commit au serveur
+        
+        if (pendingFiles.length === 0) {
+            console.error("Veuillez ajouter des fichiers avant de commiter.");
+            alert("Erreur: Veuillez ajouter des fichiers avant de commiter."); // Utilisation temporaire pour la démo
+            return;
+        }
+
+        console.log(`--- COMMIT ENVOYÉ ---`);
+        console.log(`Titre: ${commitTitle}`);
+        console.log(`Description: ${commitDesc}`);
+        console.log(`Option de Branche: ${branchOption}`);
+        console.log(`Nombre de fichiers: ${pendingFiles.length}`);
+        
+        // Redirection vers la page de dépôt après un succès simulé
+        window.location.href = 'repo_files.html?status=commit_success';
+    });
+    
+    // Afficher l'état initial des fichiers simulés
+    renderFileList(); 
+</script>
+</body>
+</html>
