@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitForge | Create a New Repository</title>
+    <title>GitForge | Créer un Nouveau Dépôt</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/7Gn3toV.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     
     <style>
         /* Configuration de la police Inter et Variables de Thème */
@@ -24,435 +26,324 @@
             --text-link: #0969DA; 
             --primary-color: #2DA44E; /* Bouton Create repository (Vert) */
             --primary-hover: #2C974B; 
-            --input-border: #D0D7DE;
-            --input-focus: #0969DA;
+            --danger-color: #CF222E;
         }
 
-        /* Classes utilitaires pour les variables */
-        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
-        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
-        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
-        .text-link-var { color: var(--text-link); } 
-        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
-        .bg-active-var { background-color: var(--bg-active); }
-        .focus\:ring-link-var:focus { --tw-ring-color: var(--input-focus); }
-
-        /* Styles pour le Toggle (README) */
-        .toggle-checkbox { transform: translateX(0); transition: transform 0.2s ease-in-out; }
-        .toggle-checkbox:checked { transform: translateX(100%); }
-        .toggle-checkbox:checked + .toggle-label { background-color: var(--primary-color); }
-        .toggle-label { transition: background-color 0.2s ease-in-out; background-color: var(--border-color); }
-        .toggle-checkbox { background-color: var(--text-color); }
-        .toggle-checkbox:checked { background-color: var(--primary-color); }
-
-        /* Style pour les Dropdowns (les petites cartes) */
-        .dropdown-menu {
-            position: absolute;
-            z-index: 50;
-            right: 0; /* Alignement à droite du bouton parent */
-            top: 100%; /* Début sous le bouton */
-            margin-top: 0.5rem;
-            min-width: 300px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        /* Styles spécifiques au formulaire */
+        .card {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
         }
-        
-        .dropdown-item {
+        .form-input {
+            border: 1px solid var(--border-color);
             padding: 8px 12px;
-            cursor: pointer;
+            border-radius: 6px;
+            width: 100%;
+            transition: border-color 0.15s ease-in-out;
         }
-        .dropdown-item:hover {
-            background-color: var(--bg-active);
+        .form-input:focus {
+            border-color: var(--text-link);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3);
+        }
+        .select-item.active {
+            border-color: var(--text-link);
+            box-shadow: 0 0 0 1px var(--text-link);
         }
     </style>
 </head>
+<body class="bg-[var(--bg-page)] text-[var(--text-color)]">
 
-<body class="bg-page-var text-color-var min-h-screen">
-    
-    <header class="w-full bg-header-var border-b border-color-var sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
-                    <span class="text-xl font-bold text-color-var">New repository</span>
-                </div>
-                
-                <div class="ml-auto flex items-center space-x-3">
-                    <div class="hidden sm:block">
-                        <input type="text" placeholder="Type / to search" 
-                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
-                    </div>
-                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
-                        <span class="material-symbols-rounded">notifications</span>
-                    </button>
-                    <button class="p-2 rounded-lg text-secondary-var hover:text-color-var">
-                        <span class="material-symbols-rounded">add</span>
-                    </button>
-                    <button class="p-2 rounded-full text-secondary-var hover:text-color-var">
-                         <span class="material-symbols-rounded">account_circle</span>
-                    </button>
-                </div>
+    <header class="bg-[var(--bg-header)] border-b border-[var(--border-color)] p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="material-symbols-rounded text-2xl">code_blocks</span>
+                <span class="font-semibold text-lg">GitForge</span>
             </div>
-        </div>
+            </div>
     </header>
 
-    
-    <div id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <main class="max-w-3xl mx-auto p-8">
+        <h1 class="text-2xl font-semibold mb-6 border-b border-[var(--border-color)] pb-3">
+            Créer un nouveau dépôt
+        </h1>
         
-        <h1 class="text-3xl font-semibold text-color-var mb-2">Create a new repository</h1>
-        
-        <p class="text-secondary-var mb-8 border-b border-color-var pb-6">
-            Repositories contain a project's files and version history. Have a project elsewhere? 
-            <a href="#" class="text-link-var hover:underline">Import a repository.</a><br>
-            Required fields are marked with an asterisk (*).
-        </p>
+        <form id="new-repository-form" class="space-y-6">
 
-        <form id="create-repo-form">
-            
-            <div class="mb-10">
-                <h2 class="text-xl font-semibold text-color-var mb-4 border-b border-color-var pb-2">1. General</h2>
+            <div class="card p-4 rounded-md space-y-4">
+                <label for="repository-name" class="block text-sm font-medium">Nom du Dépôt <span class="text-red-500">*</span></label>
+                <input type="text" id="repository-name" class="form-input" placeholder="Ex: mon-super-projet-web" required>
+                <p class="text-sm text-[var(--text-secondary)]">
+                    Un nom court et mémorable est recommandé.
+                </p>
+            </div>
 
-                <div class="flex flex-col md:flex-row md:space-x-4">
-                    <div class="flex-1 mb-4 md:mb-0">
-                        <label for="owner" class="text-sm font-medium block mb-1">Owner *</label>
-                        <div class="flex items-center text-lg">
-                            <span id="repo-owner" class="font-bold">mindus0</span> /
+            <div class="card p-4 rounded-md space-y-4">
+                <h2 class="text-base font-medium mb-2">Visibilité</h2>
+                
+                <label class="flex items-start space-x-3 cursor-pointer p-3 card select-item active" data-visibility="Public">
+                    <input type="radio" name="visibility" value="Public" checked class="mt-1 w-4 h-4 text-[var(--text-link)] border-gray-300 focus:ring-[var(--text-link)]" required>
+                    <div>
+                        <span class="flex items-center font-medium">
+                            <span class="material-symbols-rounded text-xl mr-1">public</span> Public
+                        </span>
+                        <p class="text-sm text-[var(--text-secondary)] mt-0.5">
+                            Tout le monde peut voir ce dépôt. Vous décidez qui peut commiter.
+                        </p>
+                    </div>
+                </label>
+
+                <label class="flex items-start space-x-3 cursor-pointer p-3 card select-item" data-visibility="Private">
+                    <input type="radio" name="visibility" value="Private" class="mt-1 w-4 h-4 text-[var(--text-link)] border-gray-300 focus:ring-[var(--text-link)]">
+                    <div>
+                        <span class="flex items-center font-medium">
+                            <span class="material-symbols-rounded text-xl mr-1">lock</span> Privé
+                        </span>
+                        <p class="text-sm text-[var(--text-secondary)] mt-0.5">
+                            Vous seul (et les collaborateurs que vous ajoutez) pouvez voir ce dépôt.
+                        </p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="card p-4 rounded-md space-y-4">
+                <h2 class="text-base font-medium mb-2">Initialiser le dépôt (Optionnel)</h2>
+                
+                <div>
+                    <label for="gitignore-search" class="block text-sm font-medium mb-1">Ajouter un fichier .gitignore</label>
+                    <input type="text" id="gitignore-search" class="form-input" placeholder="Rechercher une template (ex: Python, Node)">
+                    
+                    <div id="gitignore-results" class="mt-2 space-y-1 max-h-48 overflow-y-auto card p-2 rounded-md hidden">
                         </div>
+                    <div id="no-gitignore-items" class="mt-2 text-sm text-red-500 hidden">
+                        Aucun template correspondant trouvé.
                     </div>
-
-                    <div class="flex-1">
-                        <label for="repo-name" class="text-sm font-medium block mb-1">Repository name *</label>
-                        <input type="text" id="repo-name" name="repo-name" required
-                               placeholder="e.g. mailix"
-                               class="w-full p-2 border border-input-border rounded-lg text-color-var bg-page-var 
-                                      focus:outline-none focus:ring-2 focus:ring-link-var focus:border-link-var">
-                    </div>
+                    <p class="mt-2 text-sm text-[var(--text-secondary)]">Template sélectionné: <span id="selected-gitignore" class="font-mono bg-gray-100 p-1 rounded">Aucun</span></p>
                 </div>
 
-                <p class="text-sm text-secondary-var mt-2">
-                    Great repository names are short and memorable. How about <span class="font-mono text-color-var">expert-octo-lamp</span>?
-                </p>
-
-                <div class="mt-6">
-                    <label for="description" class="text-sm font-medium block mb-1">Description (optional)</label>
-                    <input type="text" id="description" name="description" maxlength="350"
-                           class="w-full p-2 border border-input-border rounded-lg text-color-var bg-page-var 
-                                  focus:outline-none focus:ring-2 focus:ring-link-var focus:border-link-var">
-                    <p class="text-xs text-secondary-var mt-1">
-                        <span id="char-count">0</span> / 350 characters
+                <div>
+                    <label for="license-select" class="block text-sm font-medium mb-1">Ajouter une license</label>
+                    <select id="license-select" class="form-input">
+                        <option value="">Aucune</option>
+                        <option value="MIT">MIT License</option>
+                        <option value="GPL-3.0">GPLv3</option>
+                        <option value="Apache-2.0">Apache License 2.0</option>
+                        </select>
+                    <p class="text-sm text-[var(--text-secondary)] mt-1">
+                        Aide à déterminer comment les autres peuvent utiliser votre code.
                     </p>
                 </div>
             </div>
 
-            <div class="mb-10">
-                <h2 class="text-xl font-semibold text-color-var mb-4 border-b border-color-var pb-2">2. Configuration</h2>
-                
-                <div class="border border-color-var rounded-lg p-4 mb-4">
-                    <label class="text-sm font-medium block mb-1">Choose visibility *</label>
-                    <p class="text-sm text-secondary-var mb-3">Choose who can see and commit to this repository</p>
-                    
-                    <div class="relative inline-block text-left">
-                        <button type="button" id="visibility-toggle" data-dropdown-target="visibility-menu" class="inline-flex justify-center items-center rounded-md border border-color-var shadow-sm px-4 py-2 bg-active-var text-sm font-medium text-color-var hover:bg-header-var focus:outline-none" aria-expanded="false" aria-haspopup="true">
-                            <span id="visibility-icon" class="material-symbols-rounded text-lg mr-2">public</span>
-                            <span id="visibility-text">Public</span>
-                            <span class="material-symbols-rounded text-base ml-2">expand_more</span>
-                        </button>
 
-                        <div id="visibility-menu" class="dropdown-menu hidden origin-top-right bg-card-var rounded-md ring-1 ring-black ring-opacity-5 divide-y divide-border-color-var">
-                            <div class="py-1">
-                                <div data-value="public" class="dropdown-item text-color-var group flex items-start space-x-2">
-                                    <span class="material-symbols-rounded text-lg text-link-var mt-0.5">check</span>
-                                    <div>
-                                        <p class="font-semibold flex items-center">
-                                            <span class="material-symbols-rounded text-lg mr-1">public</span> Public
-                                        </p>
-                                        <p class="text-xs text-secondary-var">Anyone on the internet can see this repository. You choose who can commit.</p>
-                                    </div>
-                                </div>
-                                <div data-value="private" class="dropdown-item text-color-var group flex items-start space-x-2">
-                                    <span class="material-symbols-rounded text-lg text-transparent mt-0.5">check</span>
-                                    <div>
-                                        <p class="font-semibold flex items-center">
-                                            <span class="material-symbols-rounded text-lg mr-1">lock</span> Private
-                                        </p>
-                                        <p class="text-xs text-secondary-var">You choose who can see and commit to this repository.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border border-color-var rounded-lg p-4 mb-4 flex justify-between items-start">
-                    <div>
-                        <label class="text-sm font-medium block mb-1">Add README</label>
-                        <p class="text-sm text-secondary-var">READMEs can be used as longer descriptions. 
-                            <a href="#" class="text-link-var hover:underline">About READMEs</a>
-                        </p>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <button type="button" class="text-sm text-secondary-var hover:text-link-var">Settings</button>
-                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="add-readme" id="add-readme" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
-                            <label for="add-readme" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="border border-color-var rounded-lg p-4 mb-4 flex justify-between items-start">
-                    <div>
-                        <label class="text-sm font-medium block mb-1">Add .gitignore</label>
-                        <p class="text-sm text-secondary-var">.gitignore tells git which files not to track. 
-                            <a href="#" class="text-link-var hover:underline">About ignoring files</a>
-                        </p>
-                    </div>
-                    
-                    <div class="relative inline-block text-left">
-                        <button type="button" id="gitignore-toggle" data-dropdown-target="gitignore-menu" class="inline-flex justify-center items-center rounded-md border border-color-var shadow-sm px-4 py-2 bg-active-var text-sm font-medium text-color-var hover:bg-header-var focus:outline-none">
-                            <span id="gitignore-text">No .gitignore</span>
-                            <span class="material-symbols-rounded text-base ml-2">expand_more</span>
-                        </button>
-                        
-                        <div id="gitignore-menu" class="dropdown-menu hidden origin-top-right bg-card-var rounded-md ring-1 ring-black ring-opacity-5">
-                            <div class="p-2 text-sm font-semibold border-b border-color-var">Choose a .gitignore template</div>
-                            <div class="p-2">
-                                <div class="relative">
-                                    <span class="material-symbols-rounded text-lg absolute left-3 top-2.5 text-secondary-var">search</span>
-                                    <input type="text" placeholder="Search templates" id="gitignore-search"
-                                           class="w-full p-2 pl-9 border border-input-border rounded-lg text-color-var bg-page-var focus:outline-none focus:ring-1 focus:ring-link-var">
-                                </div>
-                            </div>
-                            <div id="gitignore-list" class="overflow-y-auto max-h-48 text-sm">
-                                <div data-value="none" class="dropdown-item text-color-var font-semibold"><span class="material-symbols-rounded text-lg mr-1 align-bottom">check</span> No .gitignore</div>
-                                <div data-value="node" class="dropdown-item text-color-var">Node</div>
-                                <div data-value="python" class="dropdown-item text-color-var">Python</div>
-                                <div data-value="java" class="dropdown-item text-color-var">Java</div>
-                                <div id="no-gitignore-items" class="p-2 text-center text-secondary-var hidden">No items available</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="border border-color-var rounded-lg p-4 mb-8 flex justify-between items-start">
-                    <div>
-                        <label class="text-sm font-medium block mb-1">Add license</label>
-                        <p class="text-sm text-secondary-var">Licenses explain how others can use your code. 
-                            <a href="#" class="text-link-var hover:underline">About licenses</a>
-                        </p>
-                    </div>
-                    
-                    <div class="relative inline-block text-left">
-                        <button type="button" id="license-toggle" data-dropdown-target="license-menu" class="inline-flex justify-center items-center rounded-md border border-color-var shadow-sm px-4 py-2 bg-active-var text-sm font-medium text-color-var hover:bg-header-var focus:outline-none">
-                            <span id="license-text">No license</span>
-                            <span class="material-symbols-rounded text-base ml-2">expand_more</span>
-                        </button>
-
-                        <div id="license-menu" class="dropdown-menu hidden origin-top-right bg-card-var rounded-md ring-1 ring-black ring-opacity-5">
-                            <div class="p-2 text-sm font-semibold border-b border-color-var">Choose a license</div>
-                            <div class="p-2">
-                                <div class="relative">
-                                    <span class="material-symbols-rounded text-lg absolute left-3 top-2.5 text-secondary-var">search</span>
-                                    <input type="text" placeholder="Search licenses" id="license-search"
-                                           class="w-full p-2 pl-9 border border-input-border rounded-lg text-color-var bg-page-var focus:outline-none focus:ring-1 focus:ring-link-var">
-                                </div>
-                            </div>
-                            <div id="license-list" class="overflow-y-auto max-h-48 text-sm">
-                                <div data-value="none" class="dropdown-item text-color-var font-semibold flex justify-between items-center"><span class="material-symbols-rounded text-lg mr-1 align-bottom">check</span> No license</div>
-                                <div data-value="apache" class="dropdown-item text-color-var">Apache License 2.0</div>
-                                <div data-value="gnu" class="dropdown-item text-color-var">GNU General Public License v3.0</div>
-                                <div data-value="mit" class="dropdown-item text-color-var">MIT License</div>
-                                <div data-value="bsd-2" class="dropdown-item text-color-var">BSD 2-Clause "Simplified" License</div>
-                                <div data-value="bsd-3" class="dropdown-item text-color-var">BSD 3-Clause "New" or "Revised" License</div>
-                                <div data-value="boost" class="dropdown-item text-color-var">Boost Software License 1.0</div>
-                                <div data-value="cc0" class="dropdown-item text-color-var">Creative Commons Zero v1.0 Universal</div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" 
-                        id="create-repo-btn"
-                        class="px-5 py-2 bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150 shadow-md disabled:opacity-50">
-                    Create repository
-                </button>
-            </div>
+            <button id="create-repo-btn" type="submit" class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[var(--primary-color)] text-base font-medium text-white hover:bg-[var(--primary-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] sm:text-sm transition-colors duration-150">
+                Créer le dépôt
+            </button>
         </form>
-    </div>
 
-    <footer class="mt-12 py-8 border-t border-color-var text-center text-sm text-secondary-var">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="flex justify-center items-center space-x-3">
-                <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-4">
-                <span>© 2025 GitForge, Inc. ·</span> 
-                <a href="#" class="hover:text-link-var">Terms</a> · 
-                <a href="#" class="hover:text-link-var">Privacy</a> · 
-                <a href="#" class="hover:text-link-var">Security</a> · 
-                <a href="#" class="hover:text-link-var">Status</a> ·
-                <a href="#" class="hover:text-link-var">Community</a> · 
-                <a href="#" class="hover:text-link-var">Docs</a> ·
-                <a href="#" class="hover:text-link-var">Contact</a> ·
-                <a href="#" class="hover:text-link-var">Manage cookies</a>
-            </p>
-            <p class="mt-2">Do not share my personal information</p>
-        </div>
+    </main>
+    
+    <footer class="mt-12 border-t border-[var(--border-color)] p-4 text-center text-sm text-[var(--text-secondary)]">
+        &copy; 2024 GitForge. Propulsé par Hugging Face et Baserow.
     </footer>
 
+    <script>
+        // 1. URL du Backend
+        const BACKEND_URL = 'https://ernestmindres-mailix.hf.space';
 
-<script>
-    const repoNameInput = document.getElementById('repo-name');
-    const descriptionInput = document.getElementById('description');
-    const charCountSpan = document.getElementById('char-count');
-    const createRepoBtn = document.getElementById('create-repo-btn');
-    const form = document.getElementById('create-repo-form');
+        // 2. Récupération des éléments du DOM
+        const form = document.getElementById('new-repository-form');
+        const repoNameInput = document.getElementById('repository-name');
+        const createBtn = document.getElementById('create-repo-btn');
+        const visibilityRadios = document.querySelectorAll('input[name="visibility"]');
+        const visibilityLabels = document.querySelectorAll('.select-item');
+        const gitignoreSearch = document.getElementById('gitignore-search');
+        const gitignoreResults = document.getElementById('gitignore-results');
+        const noGitignoreItems = document.getElementById('no-gitignore-items');
+        const selectedGitignoreSpan = document.getElementById('selected-gitignore');
+        const licenseSelect = document.getElementById('license-select');
 
-    // État du formulaire
-    let visibility = 'public';
-    let gitignore = 'none';
-    let license = 'none';
+        // 3. Variables d'état (Simulées à partir des inputs)
+        let visibility = 'Public';
+        let gitignore = '';
+        let license = '';
 
-    // 1. Mise à jour du compteur de caractères pour la description
-    descriptionInput.addEventListener('input', () => {
-        charCountSpan.textContent = descriptionInput.value.length;
-    });
-
-    // 2. Activation/Désactivation du bouton de création de dépôt
-    const checkFormValidity = () => {
-        const isValid = repoNameInput.value.trim().length > 0;
-        createRepoBtn.disabled = !isValid;
-    };
-    
-    repoNameInput.addEventListener('input', checkFormValidity);
-    document.addEventListener('DOMContentLoaded', checkFormValidity);
-
-    // 3. Logique de Gestion des Dropdowns
-    const setupDropdown = (toggleId, menuId, textId, checkmarksSelector, initialValue) => {
-        const toggle = document.getElementById(toggleId);
-        const menu = document.getElementById(menuId);
-        const textDisplay = document.getElementById(textId);
-        let currentValue = initialValue;
-
-        // Fonction pour ouvrir/fermer le menu
-        const toggleMenu = (e) => {
-            // Fermer tous les autres menus avant d'ouvrir celui-ci
-            document.querySelectorAll('.dropdown-menu').forEach(m => {
-                if (m.id !== menuId) {
-                    m.classList.add('hidden');
-                    m.setAttribute('aria-expanded', 'false');
-                }
-            });
-
-            menu.classList.toggle('hidden');
-            const isExpanded = menu.classList.contains('hidden') ? 'false' : 'true';
-            toggle.setAttribute('aria-expanded', isExpanded);
-            
-            // Empêcher la propagation pour ne pas fermer immédiatement via document.click
-            if (e) e.stopPropagation();
-        };
-
-        // Fermer le menu lors d'un clic à l'extérieur
-        document.addEventListener('click', (e) => {
-            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.add('hidden');
-                toggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-
-        toggle.addEventListener('click', toggleMenu);
-
-        // Gestion de la sélection des éléments
-        menu.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const newValue = item.getAttribute('data-value');
-                const newText = item.querySelector('p:not(.text-xs), span:not(.material-symbols-rounded)').textContent.trim() || item.textContent.trim();
-                
-                // Mettre à jour l'état
-                currentValue = newValue;
-                textDisplay.textContent = newText;
-                
-                // Gérer les coches (checkmarks)
-                menu.querySelectorAll(checkmarksSelector).forEach(check => {
-                    check.classList.add('text-transparent');
+        // 4. Logique du Formulaire (Gestion des changements d'état)
+        
+        // A. Visibilité
+        visibilityRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                visibility = e.target.value;
+                visibilityLabels.forEach(label => {
+                    label.classList.remove('active');
                 });
-                item.querySelector(checkmarksSelector).classList.remove('text-transparent');
-                
-                // Fermer le menu et mettre à jour l'icône pour la visibilité
-                if (toggleId === 'visibility-toggle') {
-                    visibility = newValue;
-                    const icon = document.getElementById('visibility-icon');
-                    icon.textContent = (newValue === 'public') ? 'public' : 'lock';
-                } else if (toggleId === 'gitignore-toggle') {
-                    gitignore = newValue;
-                } else if (toggleId === 'license-toggle') {
-                    license = newValue;
-                }
-
-                toggleMenu(); // Fermer après la sélection
+                document.querySelector(`.select-item[data-visibility="${visibility}"]`).classList.add('active');
             });
         });
 
-        return currentValue;
-    };
-    
-    // Initialisation des trois menus
-    setupDropdown('visibility-toggle', 'visibility-menu', 'visibility-text', '.dropdown-item .material-symbols-rounded:not(.mr-1)', visibility);
-    setupDropdown('gitignore-toggle', 'gitignore-menu', 'gitignore-text', '#gitignore-list .dropdown-item .material-symbols-rounded', gitignore);
-    setupDropdown('license-toggle', 'license-menu', 'license-text', '#license-list .dropdown-item .material-symbols-rounded', license);
+        // B. License
+        licenseSelect.addEventListener('change', (e) => {
+            license = e.target.value;
+        });
 
 
-    // 4. Gestion de la recherche dans .gitignore (Simulation)
-    const gitignoreSearch = document.getElementById('gitignore-search');
-    const gitignoreList = document.getElementById('gitignore-list');
-    const noGitignoreItems = document.getElementById('no-gitignore-items');
-    
-    gitignoreSearch.addEventListener('input', (e) => {
-        const searchText = e.target.value.toLowerCase();
-        let itemsFound = 0;
-        
-        gitignoreList.querySelectorAll('.dropdown-item').forEach(item => {
-            const text = item.textContent.toLowerCase();
-            if (text.includes(searchText) || item.getAttribute('data-value') === 'none') {
-                item.style.display = 'flex'; // Afficher
-                if (item.getAttribute('data-value') !== 'none') itemsFound++;
+        // C. .gitignore (Logique de recherche simplifiée pour l'exemple)
+        const allGitignoreTemplates = [
+            'Python', 'Node', 'Vue', 'React', 'Angular', 'Java', 'C++', 'Unity', 'Django', 'Flask', 
+            'Go', 'C#', 'PHP', 'Ruby', 'Swift', 'Objective-C', 'Maven', 'Gradle', 'VSCode'
+        ];
+
+        // Fonction pour afficher les résultats de .gitignore
+        function renderGitignoreResults(searchText) {
+            gitignoreResults.innerHTML = '';
+            let itemsFound = 0;
+            
+            const filtered = allGitignoreTemplates
+                .filter(name => name.toLowerCase().includes(searchText.toLowerCase()))
+                .sort();
+            
+            if (filtered.length > 0) {
+                gitignoreResults.classList.remove('hidden');
+                filtered.forEach(name => {
+                    const item = document.createElement('div');
+                    item.classList.add('gitignore-item', 'p-2', 'rounded', 'cursor-pointer', 'hover:bg-[var(--bg-active)]', 'text-sm');
+                    if (name === gitignore) item.classList.add('font-semibold', 'bg-[var(--bg-active)]');
+                    item.textContent = name;
+                    item.dataset.value = name;
+                    
+                    item.addEventListener('click', () => {
+                        gitignore = name;
+                        selectedGitignoreSpan.textContent = name;
+                        gitignoreSearch.value = name;
+                        gitignoreResults.classList.add('hidden'); // Cacher après sélection
+                        renderGitignoreResults(''); // Optionnel : pour mettre à jour la sélection visuelle
+                    });
+                    gitignoreResults.appendChild(item);
+                    itemsFound++;
+                });
             } else {
-                item.style.display = 'none'; // Cacher
+                gitignoreResults.classList.add('hidden');
+            }
+
+            // Afficher le message "No items available"
+            if (itemsFound === 0 && searchText.length > 0) {
+                noGitignoreItems.classList.remove('hidden');
+            } else {
+                noGitignoreItems.classList.add('hidden');
+            }
+        }
+        
+        // Événement de recherche (Afficher/Filtrer la liste)
+        gitignoreSearch.addEventListener('input', (e) => {
+            const searchText = e.target.value.trim();
+            if (searchText.length > 0) {
+                renderGitignoreResults(searchText);
+            } else {
+                gitignoreResults.classList.add('hidden');
+                noGitignoreItems.classList.add('hidden');
+            }
+        });
+        
+        // Clic sur l'extérieur pour cacher
+        document.addEventListener('click', (e) => {
+            if (!gitignoreSearch.contains(e.target) && !gitignoreResults.contains(e.target)) {
+                // Si l'utilisateur a sélectionné un template, mettre à jour la valeur de l'input
+                if (gitignore) {
+                    gitignoreSearch.value = gitignore;
+                } else {
+                    gitignoreSearch.value = ''; // ou garder vide si rien n'est sélectionné
+                }
+                gitignoreResults.classList.add('hidden');
+                noGitignoreItems.classList.add('hidden');
+            }
+        });
+        
+        // Initialisation : permettre de vider le champ
+        gitignoreSearch.addEventListener('focus', () => {
+             // Si l'utilisateur clique sur le champ, on affiche la liste complète ou vide le champ
+             renderGitignoreResults(gitignoreSearch.value);
+        });
+        
+        // Réinitialisation du .gitignore sur vide
+        gitignoreSearch.addEventListener('blur', () => {
+            // Si le champ est vidé, on réinitialise l'état
+            if (gitignoreSearch.value.trim() === '') {
+                gitignore = '';
+                selectedGitignoreSpan.textContent = 'Aucun';
             }
         });
 
-        // Afficher le message "No items available" si aucun résultat
-        if (itemsFound === 0 && searchText.length > 0) {
-            noGitignoreItems.classList.remove('hidden');
-        } else {
-            noGitignoreItems.classList.add('hidden');
-        }
-    });
 
-    // 5. Soumission du Formulaire (Simulation)
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const repoName = repoNameInput.value.trim();
-        
-        if (!repoName) {
-            alert("Veuillez donner un nom à votre dépôt.");
-            return;
-        }
+        // 5. Soumission du Formulaire (Mise à Jour pour le VRAI Backend)
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const repoName = repoNameInput.value.trim();
 
-        // VRAI BACKEND: Envoyer toutes les données (repoName, visibility, gitignore, license, etc.) au serveur
-        
-        console.log(`--- CRÉATION DE DÉPÔT ENVOYÉE ---`);
-        console.log(`Nom du Dépôt: ${repoName}`);
-        console.log(`Visibilité: ${visibility}`);
-        console.log(`.gitignore: ${gitignore}`);
-        console.log(`License: ${license}`);
-        
-        // Redirection vers la page repo_files.html (page d'accueil du nouveau dépôt)
-        window.location.href = `repo_files.html?repo=${encodeURIComponent(repoName)}&status=created`;
-    });
-    
-    // 6. Logique de l'interrupteur README
-    const toggleCheckbox = document.getElementById('add-readme');
-    toggleCheckbox.checked = false; // Par défaut sur Off
+            if (!repoName) {
+                alert("Veuillez donner un nom à votre dépôt.");
+                return;
+            }
 
-</script>
+            // 1. Préparer les données
+            const repoData = {
+                repo_name: repoName,
+                visibility: visibility, 
+                gitignore_template: gitignore, 
+                license_template: license
+            };
 
+            // 2. Préparer l'interface utilisateur pour l'attente
+            createBtn.disabled = true;
+            createBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">sync</span> Création...';
+            createBtn.classList.add('opacity-70');
+            
+            const API_ENDPOINT = `${BACKEND_URL}/api/create_repository`;
+
+            try {
+                // 3. Envoyer la requête au backend
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // ENVOI DU COOKIE DE SESSION pour l'authentification (@login_required)
+                    credentials: 'include', 
+                    body: JSON.stringify(repoData)
+                });
+
+                const result = await response.json();
+
+                // 4. Gérer la réponse
+                if (response.ok) {
+                    // Succès (statut 201 attendu par le backend) : Récupérer le repo_slug et rediriger
+                    const repoSlug = result.repo_slug;
+                    console.log(`Dépôt créé avec succès. Slug: ${repoSlug}`);
+                    // Redirection vers la page repo_files.html avec le slug du dépôt
+                    window.location.href = `repo_files.html?repo_slug=${encodeURIComponent(repoSlug)}&status=created`;
+                } else {
+                    // Échec (ex: 400 Bad Request, 401 Unauthorized, 409 Conflict)
+                    alert(`Erreur lors de la création du dépôt : ${result.message || 'Erreur inconnue du serveur.'}`);
+                }
+
+            } catch (error) {
+                // Erreur réseau ou de parsing (par ex. si le backend est injoignable)
+                console.error("Erreur Fetch:", error);
+                alert("Erreur réseau. Le backend est peut-être injoignable. Veuillez vérifier l'URL ou réessayer.");
+            } finally {
+                // Rétablir l'interface utilisateur
+                createBtn.disabled = false;
+                createBtn.innerHTML = 'Créer le dépôt';
+                createBtn.classList.remove('opacity-70');
+            }
+        });
+
+        // 6. Logique de Sécurité (Sécuriser l'accès après connexion - Simulé côté client)
+        // C'est ici que vous pourriez vérifier l'existence d'un cookie de session
+        // ou appeler un endpoint de vérification (`/api/me`) pour s'assurer que l'utilisateur est connecté.
+        // Si non connecté, rediriger vers la page de connexion.
+        // Exemple simple : on suppose que la page est inaccessible sans une session active.
+
+    </script>
 </body>
 </html>
