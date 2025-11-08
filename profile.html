@@ -17,204 +17,179 @@
         
         /* Mode Clair (Thème UNIQUE) */
         .light {
-            --bg-page: #FFFFFF;
-            --bg-header: #F6F8FA;
-            --bg-card: #FFFFFF;
-            --bg-active: #F3F4F6;
-            --border-color: #D0D7DE;
-            --text-color: #24292F;
-            --text-secondary: #57606A;
-            --text-link: #0969DA;
-            --primary-color: #2DA44E;
-            --primary-hover: #2C974B;
-        }
-        /* Classes utilitaires pour les variables */
-        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
-        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
-        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
-        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
-        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
-        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
-        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
-
-        /* Style pour les liens de la barre latérale */
-        .sidebar-link {
-            display: flex; align-items: center; padding: 0.5rem 0.75rem; border-radius: 0.5rem; 
-            color: var(--text-color); border: 1px solid transparent;
-        }
-        .sidebar-link:hover {
-            background-color: var(--bg-active);
-        }
-        .sidebar-link.active {
-            border-color: var(--border-color);
-            background-color: var(--bg-card);
-            font-weight: 600;
+            --bg-page-var: #FFFFFF;
+            --bg-header-var: #F6F8FA;
+            --bg-card-var: #FFFFFF;
+            --bg-active-var: #F3F4F6;
+            --border-color-var: #D0D7DE;
+            --color-var: #24292F;
+            --secondary-var: #57606A;
+            --link-var: #0969DA;
+            --link-hover-var: #0550B9;
+            --primary-button-bg-var: #2DA44E;
+            --primary-button-hover-bg-var: #2C974B;
+            --primary-button-text-var: #FFFFFF;
+            --error-color-var: #CF222E;
+            --success-color-var: #1A7F37;
         }
 
-        /* Style spécifique aux inputs */
-        .form-input {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem; /* rounded-md */
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-card);
-            color: var(--text-color);
-            transition: all 0.2s;
+        /* Mode Sombre (Si jamais vous l'activez, il suffit de changer la classe <html> en 'dark') */
+        /* .dark {
+            --bg-page-var: #0D1117;
+            --bg-header-var: #161B22;
+            --bg-card-var: #0D1117;
+            --bg-active-var: #21262D;
+            --border-color-var: #30363D;
+            --color-var: #C9D1D9;
+            --secondary-var: #8B949E;
+            --link-var: #58A6FF;
+            --link-hover-var: #388BFD;
+            --primary-button-bg-var: #238636;
+            --primary-button-hover-bg-var: #227D33;
+            --primary-button-text-var: #FFFFFF;
+            --error-color-var: #F85149;
+            --success-color-var: #3FB950;
+        } */
+
+        /* Application des variables */
+        body {
+            background-color: var(--bg-page-var);
+            color: var(--color-var);
         }
-        .form-input:focus {
-            outline: none;
-            border-color: var(--text-link);
-            box-shadow: 0 0 0 1px var(--text-link);
-        }
+        .text-color-var { color: var(--color-var); }
+        .bg-page-var { background-color: var(--bg-page-var); }
+        .bg-header-var { background-color: var(--bg-header-var); }
+        .bg-card-var { background-color: var(--bg-card-var); }
+        .bg-active-var { background-color: var(--bg-active-var); }
+        .border-color-var { border-color: var(--border-color-var); }
+        .text-secondary-var { color: var(--secondary-var); }
+        .text-link-var { color: var(--link-var); }
+        .hover\:text-link-hover-var:hover { color: var(--link-hover-var); }
+        .bg-primary-button-var { background-color: var(--primary-button-bg-var); }
+        .hover\:bg-primary-button-hover-var:hover { background-color: var(--primary-button-hover-bg-var); }
+        .text-primary-button-var { color: var(--primary-button-text-var); }
+        .text-error-var { color: var(--error-color-var); }
+        .text-success-var { color: var(--success-color-var); }
+
+        /* Styles supplémentaires pour l'esthétique et la réactivité */
+        .shadow-md-custom { box-shadow: 0 1px 3px rgba(27,31,35,.15), 0 0 0 1px rgba(27,31,35,.04); }
+        input:focus, button:focus { outline: none; box-shadow: 0 0 0 3px rgba(9,105,218,.3); border-color: var(--link-var); }
     </style>
 </head>
 
-<body class="bg-page-var text-color-var min-h-screen transition-colors-theme flex flex-col">
-    
-    <header class="w-full bg-header-var border-b border-color-var transition-colors-theme sticky top-0 z-50">
+<body class="flex flex-col min-h-screen transition-colors-theme">
+
+    <!-- En-tête de navigation -->
+    <header class="w-full bg-header-var border-b border-color-var transition-colors-theme">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-4">
-                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
-                    <span class="text-xl font-bold text-color-var transition-colors-theme">GitForge</span>
-                    
-                    <span class="text-secondary-var hidden sm:inline">/</span>
-                    <span class="text-secondary-var text-lg font-semibold transition-colors-theme hidden sm:inline">
-                         <span id="user-context">mindus0</span>
-                    </span>
-                </div>
-                
-                <div class="flex items-center space-x-3">
-                    <div class="hidden sm:block">
-                        <input type="text" placeholder="Rechercher /" 
-                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 transition-colors-theme focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
-                    </div>
-                    
-                    <a href="nouveau_project.html" title="Créer un nouveau dépôt"
-                        class="inline-flex items-center px-3 py-1.5 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
-                        <span class="material-symbols-rounded text-base">add</span>
-                        <span class="hidden md:inline ml-1"> Nouveau Dépôt</span>
-                    </a>
-                    
-                    <a href="profile.html" title="Mon Profil"
-                         class="p-2 rounded-full text-color-var hover:text-link-var transition-colors-theme">
-                         <span class="material-symbols-rounded">account_circle</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="w-full border-b border-color-var bg-page-var transition-colors-theme">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
-                    <a href="dashboard.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
-                        <span class="material-symbols-rounded text-base mr-1">home</span> Dashboard
-                    </a>
-                    <a href="upload_file.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
-                        <span class="material-symbols-rounded text-base mr-1">upload_file</span> Importer
-                    </a>
-                    <a href="a_propos.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
-                        <span class="material-symbols-rounded text-base mr-1">info</span> À Propos
-                    </a>
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6 w-auto">
+                    <span class="text-xl font-bold text-color-var">GitForge</span>
+                </a>
+
+                <!-- Navigation de droite -->
+                <nav class="flex items-center space-x-4">
+                    <a href="/dashboard.html" class="text-color-var hover:text-link-hover-var font-medium">Tableau de bord</a>
+                    <button id="logoutButton"
+                            class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg 
+                                   bg-primary-button-var text-primary-button-text-var hover:bg-primary-button-hover-var 
+                                   transition duration-150 shadow-md-custom"
+                            type="button">
+                        Déconnexion
+                    </button>
                 </nav>
             </div>
         </div>
     </header>
 
-    
-    <div id="main-content" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-colors-theme w-full">
-        <h1 class="text-3xl font-bold text-color-var mb-6 border-b pb-3 border-color-var/50">Paramètres du Compte</h1>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            <div class="lg:col-span-1 space-y-2">
-                <nav class="space-y-1 text-sm bg-card-var p-4 rounded-lg border border-color-var">
-                    <a href="profile.html" class="sidebar-link active transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">person</span> 
-                        Profil Public
-                    </a>
-                    <a href="settings_security.html" class="sidebar-link transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">lock</span> 
-                        Sécurité et Connexion
-                    </a>
-                    <a href="settings_notifications.html" class="sidebar-link transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">notifications</span> 
-                        Notifications
-                    </a>
-                    <a href="settings_billing.html" class="sidebar-link transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">credit_card</span> 
-                        Facturation (Tarifs)
-                    </a>
-                </nav>
-            </div>
-            
-            <div class="lg:col-span-3 space-y-8">
+    <!-- Contenu Principal -->
+    <div class="flex-grow pt-8 pb-12 transition-colors-theme">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
-                    <h2 class="text-xl font-semibold text-color-var mb-6 border-b pb-2 border-color-var/50">
-                        Informations de Profil Public
-                    </h2>
-                    
-                    <form id="public-profile-form" class="space-y-6">
-                        
-                        <div>
-                            <label for="full_name" class="block text-sm font-medium mb-1 text-color-var">Nom Complet</label>
-                            <input type="text" id="full_name" name="full_name" value="Mindus Zéro" 
-                                   placeholder="Votre nom complet" class="form-input" required>
-                        </div>
+            <h1 class="text-3xl font-bold mb-6 text-color-var">Mon Profil</h1>
+            <p class="text-secondary-var mb-8">Gérez les informations de votre compte et les paramètres de sécurité.</p>
 
-                        <div>
-                            <label for="username" class="block text-sm font-medium mb-1 text-color-var">Nom d'Utilisateur GitForge</label>
-                            <input type="text" id="username" name="username" value="mindus0" disabled 
-                                   placeholder="mindus0" class="form-input bg-gray-100/50 cursor-not-allowed">
-                            <p class="text-xs mt-1 text-secondary-var">Le nom d'utilisateur ne peut être modifié que par un administrateur.</p>
-                        </div>
-                        
-                        <div>
-                            <label for="bio" class="block text-sm font-medium mb-1 text-color-var">Bio (Max. 160 caractères)</label>
-                            <textarea id="bio" name="bio" rows="3" maxlength="160" 
-                                      placeholder="Parlez de vous en quelques mots..." class="form-input">Développeur passionné par les forges logicielles.</textarea>
-                        </div>
+            <div class="bg-card-var border border-color-var rounded-xl shadow-md-custom p-6 sm:p-8">
 
-                        <div>
-                            <label for="location" class="block text-sm font-medium mb-1 text-color-var">Localisation</label>
-                            <input type="text" id="location" name="location" value="Port-au-Prince, Haïti" 
-                                   placeholder="Ville, Pays" class="form-input">
-                        </div>
-
-                        <div>
-                            <label for="website" class="block text-sm font-medium mb-1 text-color-var">Site Web (URL)</label>
-                            <input type="url" id="website" name="website" value="" 
-                                   placeholder="https://votre-site.com" class="form-input">
-                        </div>
-                        
-                        <div class="pt-4 border-t border-color-var/50">
-                            <button type="submit" 
-                                    class="inline-flex items-center px-4 py-2 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
-                                <span class="material-symbols-rounded text-base mr-1">save</span> Sauvegarder les changements
-                            </button>
-                        </div>
-                    </form>
+                <!-- Affichage du statut de l'utilisateur (Optionnel : comme son plan) -->
+                <div class="mb-8 p-4 bg-active-var border border-color-var rounded-lg flex items-center justify-between">
+                    <p class="text-sm font-medium text-color-var">
+                        Statut du Compte: <span id="userStatus" class="font-semibold text-link-var">Chargement...</span>
+                    </p>
+                    <a href="#" class="text-sm text-link-var hover:text-link-hover-var font-medium transition duration-150">Gérer l'abonnement</a>
                 </div>
 
-                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
-                    <h2 class="text-xl font-semibold text-color-var mb-6 border-b pb-2 border-color-var/50">
-                        Photo de Profil
-                    </h2>
-                    
-                    <div class="flex items-center space-x-6">
-                        <div class="w-24 h-24 rounded-full bg-secondary-var flex items-center justify-center text-4xl text-white overflow-hidden border border-color-var">
-                            <span class="material-symbols-rounded text-5xl">account_circle</span>
+                <!-- Section Photo de Profil -->
+                <div class="border-b border-color-var pb-6 mb-6">
+                    <h2 class="text-xl font-semibold mb-4 text-color-var">Photo de Profil</h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="h-16 w-16 bg-header-var rounded-full flex items-center justify-center border border-color-var overflow-hidden">
+                            <!-- Placeholder pour l'image de profil -->
+                            <span class="material-symbols-rounded text-5xl text-secondary-var">account_circle</span>
                         </div>
                         <div>
                             <button type="button" 
                                     class="inline-flex items-center px-3 py-1.5 text-sm border border-color-var bg-active-var text-color-var font-medium rounded-lg hover:bg-page-var transition duration-150">
                                 Télécharger une nouvelle photo
                             </button>
-                            <p class="text-xs mt-2 text-secondary-var">JPG, PNG ou GIF. Taille max. 5MB.</p>
+                            <p class="text-xs mt-2 text-secondary-var">JPG, PNG ou GIF. Taille max. 5MB. (Non fonctionnel pour l'instant)</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Formulaire de Mise à Jour du Profil -->
+                <form id="profileUpdateForm">
+                    
+                    <!-- Messages de notification (Succès/Erreur) -->
+                    <div id="messageBox" role="alert" class="hidden mb-6 p-3 rounded-lg text-sm transition-opacity duration-300"></div>
+
+                    <!-- Champ Nom d'Utilisateur -->
+                    <div class="mb-6">
+                        <label for="username" class="block text-sm font-medium mb-2 text-color-var">Nom d'Utilisateur</label>
+                        <input type="text" id="username" name="username" required
+                               class="w-full px-4 py-2 border border-color-var rounded-lg bg-card-var text-color-var placeholder-secondary-var focus:ring-link-var focus:border-link-var transition duration-150"
+                               placeholder="Votre nouveau nom d'utilisateur">
+                    </div>
+
+                    <!-- Champ Email -->
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium mb-2 text-color-var">Adresse Email</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-2 border border-color-var rounded-lg bg-card-var text-color-var placeholder-secondary-var focus:ring-link-var focus:border-link-var transition duration-150"
+                               placeholder="Votre nouvelle adresse email">
+                    </div>
+
+                    <!-- Titre pour Mot de Passe -->
+                    <h2 class="text-xl font-semibold mb-4 pt-4 border-t border-color-var text-color-var">Changer le Mot de Passe (Optionnel)</h2>
+
+                    <!-- Nouveau Mot de Passe -->
+                    <div class="mb-6">
+                        <label for="new_password" class="block text-sm font-medium mb-2 text-color-var">Nouveau Mot de Passe</label>
+                        <input type="password" id="new_password" name="new_password"
+                               class="w-full px-4 py-2 border border-color-var rounded-lg bg-card-var text-color-var placeholder-secondary-var focus:ring-link-var focus:border-link-var transition duration-150"
+                               placeholder="Laissez vide pour ne pas changer" autocomplete="new-password">
+                        <p class="text-xs mt-1 text-secondary-var">Minimum 8 caractères.</p>
+                    </div>
+
+                    <!-- Confirmation du Nouveau Mot de Passe -->
+                    <div class="mb-8">
+                        <label for="confirm_password" class="block text-sm font-medium mb-2 text-color-var">Confirmer le Nouveau Mot de Passe</label>
+                        <input type="password" id="confirm_password" name="confirm_password"
+                               class="w-full px-4 py-2 border border-color-var rounded-lg bg-card-var text-color-var placeholder-secondary-var focus:ring-link-var focus:border-link-var transition duration-150"
+                               placeholder="Confirmez le nouveau mot de passe" autocomplete="new-password">
+                    </div>
+
+                    <!-- Bouton de Soumission -->
+                    <button type="submit" id="submitButton"
+                            class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2.5 text-base font-medium rounded-lg 
+                                   bg-primary-button-var text-primary-button-text-var hover:bg-primary-button-hover-var 
+                                   transition duration-150 shadow-md-custom disabled:opacity-50">
+                        <span id="buttonText">Sauvegarder les changements</span>
+                        <span id="spinner" class="hidden ml-2 h-4 w-4 border-2 border-primary-button-text-var border-t-transparent rounded-full animate-spin"></span>
+                    </button>
+                </form>
 
             </div>
             
@@ -227,9 +202,191 @@
             <nav class="space-x-4">
                 <a href="conditions_utilisation.html" class="text-link-var hover:text-link-hover-var">Conditions d'Utilisation</a>
                 <a href="mentions_legales.html" class="text-link-var hover:text-link-hover-var">Mentions Légales</a>
-                <a href="politique_confidentialite.html" class="text-link-var hover:text-link-hover-var">Confidentialité</a>
+                <a href="politique_confidentialite.html" class="text-link-var hover:text-link-hover-var">Politique de Confidentialité</a>
             </nav>
         </div>
     </footer>
+
+    <script>
+        // URL du backend Hugging Face (à remplacer par l'URL réelle du backend si elle change)
+        const BACKEND_URL = "https://ernestmindres-mailix.hf.space";
+
+        const profileUpdateForm = document.getElementById('profileUpdateForm');
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const spinner = document.getElementById('spinner');
+        const messageBox = document.getElementById('messageBox');
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const newPasswordInput = document.getElementById('new_password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+        const userStatusSpan = document.getElementById('userStatus');
+        const logoutButton = document.getElementById('logoutButton');
+
+        /**
+         * Affiche un message de succès ou d'erreur.
+         * @param {string} message - Le texte du message.
+         * @param {boolean} isSuccess - Vrai pour succès, Faux pour erreur.
+         */
+        function showMessage(message, isSuccess) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-red-100', 'text-error-var', 'bg-green-100', 'text-success-var');
+            if (isSuccess) {
+                messageBox.classList.add('bg-green-100', 'text-success-var');
+            } else {
+                messageBox.classList.add('bg-red-100', 'text-error-var');
+            }
+            messageBox.style.opacity = '1';
+        }
+
+        /**
+         * Gère l'état du bouton de soumission (Chargement/Normal).
+         * @param {boolean} isLoading - Vrai pour afficher le spinner.
+         */
+        function setButtonLoading(isLoading) {
+            submitButton.disabled = isLoading;
+            buttonText.textContent = isLoading ? "Sauvegarde en cours..." : "Sauvegarder les changements";
+            spinner.classList.toggle('hidden', !isLoading);
+        }
+
+        /**
+         * Récupère les informations de l'utilisateur et pré-remplit le formulaire.
+         */
+        async function fetchUserInfo() {
+            try {
+                // Pour les environnements de développement local où l'URL du backend n'est pas nécessaire,
+                // vous pouvez commenter 'BACKEND_URL +'.
+                const response = await fetch(`${BACKEND_URL}/api/user_info`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                    // Le backend gère l'authentification via les cookies de session
+                });
+
+                if (response.status === 401) {
+                    // Si non autorisé (session expirée ou non connecté), rediriger vers la page de connexion
+                    window.location.href = '/connexion.html';
+                    return;
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const user = result.user;
+                    usernameInput.value = user.username || '';
+                    emailInput.value = user.email || '';
+                    // Afficher le statut (Plan ou un message par défaut si le champ 'plan' n'est pas présent)
+                    userStatusSpan.textContent = user.plan ? `Plan ${user.plan.toUpperCase()}` : 'Plan Gratuit (Défaut)';
+                } else {
+                    showMessage(result.message || "Erreur lors de la récupération du profil.", false);
+                }
+
+            } catch (error) {
+                console.error("Erreur de connexion à l'API de profil:", error);
+                showMessage("Erreur de connexion au serveur. Veuillez réessayer.", false);
+            }
+        }
+
+        /**
+         * Gère la mise à jour du profil.
+         * @param {Event} e - L'événement de soumission du formulaire.
+         */
+        async function handleProfileUpdate(e) {
+            e.preventDefault();
+            setButtonLoading(true);
+            messageBox.classList.add('hidden');
+
+            const newPassword = newPasswordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Simple validation frontend pour les champs de mot de passe
+            if (newPassword && newPassword !== confirmPassword) {
+                showMessage("Le nouveau mot de passe et la confirmation ne correspondent pas.", false);
+                setButtonLoading(false);
+                return;
+            }
+            if (newPassword && newPassword.length < 8) {
+                showMessage("Le nouveau mot de passe est trop court (min 8 caractères).", false);
+                setButtonLoading(false);
+                return;
+            }
+
+            const data = {
+                username: usernameInput.value,
+                email: emailInput.value,
+            };
+
+            // Inclure les mots de passe uniquement s'ils sont remplis
+            if (newPassword) {
+                data.new_password = newPassword;
+                data.confirm_password = confirmPassword;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/update_profile`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showMessage(result.message || "Profil mis à jour avec succès.", true);
+                    // Réinitialiser les champs de mot de passe après un succès
+                    newPasswordInput.value = '';
+                    confirmPasswordInput.value = '';
+                } else {
+                    showMessage(result.message || "Échec de la mise à jour du profil.", false);
+                }
+
+            } catch (error) {
+                console.error("Erreur lors de la mise à jour du profil:", error);
+                showMessage("Erreur de connexion au serveur. Veuillez réessayer.", false);
+            } finally {
+                setButtonLoading(false);
+            }
+        }
+
+        /**
+         * Gère la déconnexion.
+         */
+        async function handleLogout() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+                
+                // Rediriger, que le résultat soit succès ou non, car la session est détruite côté serveur
+                window.location.href = result.redirect || '/connexion.html';
+
+            } catch (error) {
+                console.error("Erreur lors de la déconnexion:", error);
+                // En cas d'erreur de réseau, forcer la redirection
+                window.location.href = '/connexion.html';
+            }
+        }
+
+        // Événements
+        document.addEventListener('DOMContentLoaded', fetchUserInfo);
+        profileUpdateForm.addEventListener('submit', handleProfileUpdate);
+        logoutButton.addEventListener('click', handleLogout);
+
+        // Vérification initiale de la connexion (très basique pour l'exemple)
+        // La vraie vérification se fait côté backend lors de l'appel à fetchUserInfo (401)
+        // Ceci est juste une vérification supplémentaire
+        if (!document.cookie.includes('session')) {
+           // window.location.href = '/connexion.html';
+        }
+
+    </script>
 </body>
 </html>
