@@ -21,245 +21,324 @@
             --bg-header: #161B22; 
             --bg-card: #161B22; 
             --bg-active: #30363d; 
-            --border-color: #30363d; 
-            --text-color: #E6EDF3; 
-            --text-secondary: #8B949E; 
-            --text-link: #58A6FF; 
-            --primary-color: #238636; 
-            --primary-hover: #2EA043; 
+            --border-color: #30363d;
+            --color: #C9D1D9;
+            --color-link: #58A6FF;
         }
+
         /* Mode Clair (Thème UNIQUE) */
         .light {
-            --bg-page: #FFFFFF;
-            --bg-header: #F6F8FA;
-            --bg-card: #FFFFFF;
-            --bg-active: #F3F4F6;
-            --border-color: #D0D7DE;
-            --text-color: #24292F;
-            --text-secondary: #57606A;
-            --text-link: #0969DA;
-            --primary-color: #2DA44E;
-            --primary-hover: #2C974B;
+            --bg-page-var: #FFFFFF;
+            --bg-header-var: #F6F8FA;
+            --bg-card-var: #FFFFFF;
+            --bg-active-var: #F3F4F6;
+            --border-color-var: #D0D7DE;
+            --color-var: #24292F;
+            --color-link-var: #0969DA;
         }
-        /* Classes utilitaires pour les variables */
-        .bg-page-var { background-color: var(--bg-page); } .bg-card-var { background-color: var(--bg-card); }
-        .bg-header-var { background-color: var(--bg-header); } .border-color-var { border-color: var(--border-color); }
-        .text-color-var { color: var(--text-color); } .text-secondary-var { color: var(--text-secondary); }
-        .text-link-var { color: var(--text-link); } .hover\:text-link-hover-var:hover { color: var(--text-link); }
-        .bg-primary-color-var { background-color: var(--primary-color); } .hover\:bg-primary-hover-var:hover { background-color: var(--primary-hover); }
-        .bg-active-var { background-color: var(--bg-active); } .hover\:bg-active-var:hover { background-color: var(--bg-active); }
-        .focus\:ring-primary-color-var:focus { --tw-ring-color: var(--primary-color); }
-        .repo-nav-link { padding: 0.5rem 1rem; border-bottom: 2px solid transparent; margin-right: 0.5rem; }
-        .repo-nav-link.active { border-bottom-color: var(--text-link); color: var(--text-color) !important; font-weight: 600; }
-        
-        /* Style pour les liens de la barre latérale du Dashboard */
-        .sidebar-link {
-            display: flex; align-items: center; padding: 0.5rem; border-radius: 0.5rem; 
-            color: var(--text-secondary);
-        }
-        .sidebar-link:hover {
-            background-color: var(--bg-active);
-            color: var(--text-color);
-        }
-        .sidebar-link.active {
-            background-color: var(--bg-active);
-            color: var(--text-color);
-            font-weight: 600;
-        }
+
+        /* Appliquer les variables au mode 'light' */
+        .light body { background-color: var(--bg-page-var); color: var(--color-var); }
+        .light .header-bg { background-color: var(--bg-header-var); border-bottom-color: var(--border-color-var); }
+        .light .sidebar-bg { background-color: var(--bg-header-var); border-right-color: var(--border-color-var); }
+        .light .card-bg { background-color: var(--bg-card-var); border-color: var(--border-color-var); }
+        .light .sidebar-link { color: var(--color-var); }
+        .light .sidebar-link:hover { background-color: var(--bg-active-var); }
+        .light .sidebar-link.active { background-color: var(--bg-active-var); border-left-color: #0969DA; }
+        .light .text-link { color: var(--color-link-var); }
     </style>
 </head>
+<body class="min-h-screen flex flex-col light">
 
-<body class="bg-page-var text-color-var min-h-screen transition-colors-theme flex flex-col">
-    
-    <header class="w-full bg-header-var border-b border-color-var transition-colors-theme sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-4">
-                    <img src="https://i.imgur.com/7Gn3toV.png" alt="GitForge Logo" class="h-6">
-                    <span class="text-xl font-bold text-color-var transition-colors-theme">GitForge</span>
-                    
-                    <span class="text-secondary-var hidden sm:inline">/</span>
-                    <span class="text-secondary-var text-lg font-semibold transition-colors-theme hidden sm:inline">
-                         <span id="user-context">mindus0</span>
-                    </span>
-                </div>
-                
-                <div class="flex items-center space-x-3">
-                    <div class="hidden sm:block">
-                        <input type="text" placeholder="Rechercher /" 
-                               class="bg-page-var border border-color-var text-color-var rounded-lg p-1.5 text-sm w-48 transition-colors-theme focus:outline-none focus:border-link-var focus:ring-1 focus:ring-link-var">
-                    </div>
-                    
-                    <a href="nouveau_project.html" title="Créer un nouveau dépôt"
-                        class="inline-flex items-center px-3 py-1.5 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
-                        <span class="material-symbols-rounded text-base">add</span>
-                        <span class="hidden md:inline ml-1"> Nouveau Dépôt</span>
-                    </a>
-                    
-                    <a href="profile.html" title="Mon Profil"
-                         class="p-2 rounded-full text-color-var hover:text-link-var transition-colors-theme">
-                         <span class="material-symbols-rounded">account_circle</span>
-                    </a>
+    <!-- Header / Barre de Navigation Supérieure -->
+    <header class="header-bg border-b border-solid border-border-color-var sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <!-- Logo et Nom -->
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-8 w-auto" src="https://i.imgur.com/7Gn3toV.png" alt="Logo GitForge">
+                    <span class="ml-2 text-xl font-bold text-color-var">GitForge</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="w-full border-b border-color-var bg-page-var transition-colors-theme">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <nav class="flex space-x-1 overflow-x-auto text-sm font-medium">
-                    <a href="dashboard.html" class="repo-nav-link text-secondary-var hover:text-color-var active transition-colors-theme flex items-center">
-                        <span class="material-symbols-rounded text-base mr-1">home</span> Dashboard
-                    </a>
-                    <a href="upload_file.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
-                        <span class="material-symbols-rounded text-base mr-1">upload_file</span> Importer
-                    </a>
-                    <a href="a_propos.html" class="repo-nav-link text-secondary-var hover:text-color-var transition-colors-theme flex items-center">
-                        <span class="material-symbols-rounded text-base mr-1">info</span> À Propos
-                    </a>
-                </nav>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="theme-switch p-2 rounded-full hover:bg-bg-active-var transition-colors-theme">
+                    <span class="material-symbols-rounded text-2xl" id="theme-icon">light_mode</span>
+                </button>
+                <button id="logout-button" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded transition duration-200">
+                    Déconnexion
+                </button>
             </div>
         </div>
     </header>
 
-    
-    <div id="main-content" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-colors-theme w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            <div class="lg:col-span-1 space-y-4">
-                <h2 class="text-lg font-semibold text-color-var border-b pb-2 border-color-var/50">Navigation Rapide</h2>
-                
-                <nav class="space-y-1 text-sm">
-                    <a href="dashboard.html" class="sidebar-link active transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">view_compact</span> 
-                        Tableau de Bord
-                    </a>
-                    <a href="profile.html" class="sidebar-link transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">manage_accounts</span> 
-                        Mon Profil
-                    </a>
-                    <a href="tarifs.html" class="sidebar-link transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">paid</span> 
-                        Tarifs et Abonnements
-                    </a>
-                    <a href="statut.html" class="sidebar-link transition-colors-theme">
-                        <span class="material-symbols-rounded text-base mr-3">health_and_safety</span> 
-                        Statut du Système
-                    </a>
-                </nav>
-            </div>
-            
-            <div class="lg:col-span-3 space-y-8">
-                <h1 class="text-2xl font-bold text-color-var">Bienvenue sur GitForge, mindus0 !</h1>
-                
-                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
-                    <div class="flex justify-between items-center mb-4 border-b pb-2 border-color-var/50">
-                        <h2 class="text-xl font-semibold text-color-var flex items-center">
-                            <span class="material-symbols-rounded mr-2">code_blocks</span> Vos Dépôts Récents
-                        </h2>
-                        <a href="nouveau_project.html" 
-                            class="text-sm text-link-var hover:text-link-hover-var whitespace-nowrap hidden sm:inline-flex items-center">
-                            <span class="material-symbols-rounded text-base mr-1">add</span> Créer un Nouveau Dépôt
-                        </a>
-                    </div>
-                    
-                    <div id="repositories-list" class="space-y-3">
-                        <div id="loading-repos" class="text-center p-4 text-secondary-var">
-                            <span class="material-symbols-rounded animate-spin text-2xl mb-2">progress_activity</span>
-                            <p>Chargement de vos dépôts...</p>
-                        </div>
-                        
-                        <a href="repo_files.html?repo=mailix" class="block p-3 rounded-lg border border-color-var hover:bg-active-var transition-colors-theme">
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-medium text-link-var hover:text-link-hover-var">mindus0/mailix</span>
-                                <span class="px-2 py-0.5 text-xs font-medium rounded-full border border-color-var text-secondary-var">
-                                    Private
-                                </span>
-                            </div>
-                            <p class="text-sm text-secondary-var mt-1 truncate">Un projet de démonstration pour notre plateforme GitForge.</p>
-                            <div class="flex items-center space-x-3 text-xs text-secondary-var mt-2">
-                                <span class="flex items-center">
-                                    <span class="material-symbols-rounded text-base mr-1">update</span> Mis à jour il y a 14 heures
-                                </span>
-                                <span class="flex items-center">
-                                    <span class="material-symbols-rounded text-base mr-1">star</span> 0
-                                </span>
-                            </div>
-                        </a>
-                        </div>
-                    
-                    <div id="no-repos-message" class="hidden text-center p-8">
-                        <span class="material-symbols-rounded text-6xl text-secondary-var mb-4">folder_off</span>
-                        <h3 class="text-xl font-semibold mb-2 text-color-var">Vous n'avez aucun dépôt</h3>
-                        <p class="text-secondary-var mb-4">Commencez en créant votre premier projet.</p>
-                        <a href="nouveau_project.html" 
-                            class="inline-flex items-center px-4 py-2 text-sm bg-primary-color-var text-white font-semibold rounded-lg hover:bg-primary-hover-var transition duration-150">
-                            <span class="material-symbols-rounded text-base mr-1">add</span> Créer un Nouveau Dépôt
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="bg-card-var p-6 rounded-lg border border-color-var transition-colors-theme">
-                    <h2 class="text-xl font-semibold text-color-var mb-4 border-b pb-2 border-color-var/50 flex items-center">
-                         <span class="material-symbols-rounded mr-2">history</span> Flux d'Activité
-                    </h2>
-                    <p class="text-secondary-var">Aucune activité récente à afficher pour le moment.</p>
-                </div>
+    <!-- Contenu Principal -->
+    <div class="flex flex-1 max-w-7xl mx-auto w-full">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar-bg border-r border-solid border-border-color-var w-64 flex-shrink-0 transition-colors-theme">
+            <nav class="p-4 space-y-2">
+                <!-- IMPORTANT : Les liens pointent vers les routes du backend sécurisé ! -->
+                <a href="/dashboard" class="sidebar-link active transition-colors-theme flex items-center p-2 rounded-lg border-l-4 border-l-transparent font-medium">
+                    <span class="material-symbols-rounded mr-3">home</span> Tableau de Bord
+                </a>
+                <a href="/nouveau_project" class="sidebar-link transition-colors-theme flex items-center p-2 rounded-lg border-l-4 border-l-transparent font-medium">
+                    <span class="material-symbols-rounded mr-3">add_box</span> Nouveau Projet
+                </a>
+                <a href="/profile" class="sidebar-link transition-colors-theme flex items-center p-2 rounded-lg border-l-4 border-l-transparent font-medium">
+                    <span class="material-symbols-rounded mr-3">person</span> Profil & Compte
+                </a>
+                <a href="/tarifs" class="sidebar-link transition-colors-theme flex items-center p-2 rounded-lg border-l-4 border-l-transparent font-medium">
+                    <span class="material-symbols-rounded mr-3">credit_card</span> Tarifs & Abonnement
+                </a>
+                <a href="/statut" class="sidebar-link transition-colors-theme flex items-center p-2 rounded-lg border-l-4 border-l-transparent font-medium">
+                    <span class="material-symbols-rounded mr-3">monitor_heart</span> Statut du Service
+                </a>
+            </nav>
+        </aside>
 
+        <!-- Contenu Principal du Dashboard -->
+        <main class="flex-1 p-6 sm:p-8">
+            <h1 class="text-3xl font-bold text-color-var mb-6">Tableau de Bord</h1>
+
+            <!-- Message d'alerte (injecté par JS) -->
+            <div id="flash-message-container" class="mb-4">
+                <!-- Les messages Flash de Flask seront affichés ici par JS -->
+            </div>
+
+            <!-- Carte de Bienvenue/Statut Utilisateur -->
+            <div class="card-bg border border-solid border-border-color-var rounded-xl p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-semibold text-color-var mb-2">Bienvenue, <span id="user-username">Chargement...</span>!</h2>
+                <p class="text-sm text-gray-500 mb-4">Votre ID de Session (debug): <code id="user-id-display">N/A</code></p>
+                <div class="flex items-center space-x-4">
+                    <span class="text-lg font-medium">Plan Actuel: <span id="user-plan" class="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">Chargement...</span></span>
+                    <a href="/tarifs" class="text-link font-medium hover:underline flex items-center">
+                        Améliorer
+                        <span class="material-symbols-rounded text-lg ml-1">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Section Dépôts -->
+            <h2 class="text-2xl font-semibold text-color-var mb-4">Vos Dépôts</h2>
+            
+            <div id="loading-message" class="text-center p-8">
+                <span class="material-symbols-rounded animate-spin text-4xl text-gray-400">progress_activity</span>
+                <p class="text-gray-500 mt-2">Chargement de vos dépôts...</p>
             </div>
             
-        </div>
+            <div id="no-repos-message" class="card-bg border border-dashed border-border-color-var rounded-xl p-8 text-center hidden">
+                <span class="material-symbols-rounded text-5xl text-gray-400 mb-3">folder_open</span>
+                <h3 class="text-xl font-semibold mb-2">Aucun dépôt trouvé</h3>
+                <p class="text-gray-500 mb-4">Commencez par créer votre premier projet statique pour le déploiement.</p>
+                <a href="/nouveau_project" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 shadow-md">
+                    Créer un nouveau projet
+                </a>
+            </div>
+
+            <!-- Liste des Dépôts (Exemple statique) -->
+            <div id="repositories-list" class="space-y-4">
+                <!-- Remplacé par un exemple de template dynamique (dans le JS) -->
+                <div class="card-bg border border-solid border-border-color-var rounded-xl p-4 flex items-center justify-between hover:shadow-lg transition duration-200">
+                    <div class="flex flex-col">
+                        <a href="/repo_files/mailix" class="text-xl font-bold text-link hover:underline">mailix</a>
+                        <p class="text-sm text-gray-500">Un exemple de dépôt statique pour le déploiement.</p>
+                        <div class="flex items-center space-x-4 text-xs mt-2 text-gray-500">
+                            <span class="flex items-center"><span class="material-symbols-rounded text-sm mr-1">person</span> mindus0</span>
+                            <span class="flex items-center"><span class="material-symbols-rounded text-sm mr-1">lock</span> Public</span>
+                            <span class="flex items-center"><span class="material-symbols-rounded text-sm mr-1">update</span> 1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <!-- IMPORTANT : L'action de la route doit inclure le slug du repo -->
+                        <a href="/repo_files/mailix" class="text-blue-600 hover:text-blue-800 transition duration-200">
+                            <span class="material-symbols-rounded text-2xl">code</span>
+                        </a>
+                        <button class="text-red-600 hover:text-red-800 transition duration-200" title="Supprimer">
+                            <span class="material-symbols-rounded text-2xl">delete</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
 
-    <footer class="mt-auto w-full bg-header-var border-t border-color-var transition-colors-theme py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-            <p class="text-secondary-var mb-2">&copy; 2025 GitForge, Inc.</p>
-            <nav class="space-x-4">
-                <a href="conditions_utilisation.html" class="text-link-var hover:text-link-hover-var">Conditions d'Utilisation</a>
-                <a href="mentions_legales.html" class="text-link-var hover:text-link-hover-var">Mentions Légales</a>
-                <a href="politique_confidentialite.html" class="text-link-var hover:text-link-hover-var">Confidentialité</a>
-            </nav>
-        </div>
-    </footer>
+    <!-- Script JavaScript -->
+    <script>
+        // Le backend injecte ici les constantes BACKEND_URL et INJECTED_USER_ID
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const userIdDisplay = document.getElementById('user-id-display');
+            const userUsername = document.getElementById('user-username');
+            const userPlan = document.getElementById('user-plan');
+            const loadingMessage = document.getElementById('loading-message');
+            const repositoriesList = document.getElementById('repositories-list');
+            const noReposMessage = document.getElementById('no-repos-message');
+            const logoutButton = document.getElementById('logout-button');
 
-<script>
-    // --- SIMULATION DU CHARGEMENT DES DÉPÔTS ---
-    const loadUserRepositories = () => {
-        const repositoriesList = document.getElementById('repositories-list');
-        const loadingMessage = document.getElementById('loading-repos');
-        const noReposMessage = document.getElementById('no-repos-message');
-        
-        // Simuler une requête API
-        setTimeout(() => {
-            const userRepos = [
-                // { name: "mailix", user: "mindus0", description: "Un projet de démonstration...", visibility: "Private", lastUpdate: "14 hours ago" },
-                // { name: "gitforge-docs", user: "mindus0", description: "Documentation officielle de la plateforme.", visibility: "Public", lastUpdate: "2 days ago" },
-                // Laisser le dépôt statique 'mailix' comme exemple visible pour le moment
-            ];
+            // --- Authentification et Récupération des données utilisateur ---
             
-            // On retire le message de chargement
-            loadingMessage.classList.add('hidden');
-            
-            if (userRepos.length === 0) {
-                // Afficher le message d'absence de dépôt
-                repositoriesList.classList.add('hidden');
-                noReposMessage.classList.remove('hidden');
-            } else {
-                // Si vous aviez des dépôts dynamiques à ajouter :
-                // repositoriesList.innerHTML = userRepos.map(repo => `... template pour le dépôt ...`).join('');
-                // noReposMessage.classList.add('hidden');
-                // repositoriesList.classList.remove('hidden');
+            async function fetchUserInfo() {
+                // Si INJECTED_USER_ID n'est pas présent (erreur de passerelle ou session expirée avant injection)
+                if (typeof INJECTED_USER_ID === 'undefined' || INJECTED_USER_ID === 'None' || !INJECTED_USER_ID) {
+                    // Si l'injection échoue, le login_required du backend aurait dû nous rediriger.
+                    // Par mesure de sécurité, on redirige si on arrive ici sans ID (même si l'ID est dans la session Flask)
+                    console.error("Erreur: ID Utilisateur non injecté. Redirection.");
+                    window.location.href = `${BACKEND_URL}/connexion`; // Redirection vers la route non sécurisée
+                    return;
+                }
 
-                // Comme il y a le 'mailix' en statique, on s'assure que le 'no-repos-message' reste caché
-                // même avec une liste vide pour ne pas perturber l'exemple statique.
-                // Si la liste était gérée *uniquement* par JS, la logique ci-dessus s'appliquerait.
+                userIdDisplay.textContent = INJECTED_USER_ID; // Afficher l'ID pour debug
+                
+                try {
+                    const response = await fetch(`${BACKEND_URL}/api/profile`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                            // Les cookies de session sont envoyés automatiquement
+                        }
+                    });
+
+                    if (response.status === 401) {
+                        // Non autorisé (session expirée ou invalide)
+                        handleLogout(false); // Redirection sans appel API de déconnexion
+                        return;
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        const user = result.user;
+                        userUsername.textContent = user.username;
+                        userPlan.textContent = user.plan.toUpperCase();
+                        
+                        // Style dynamique du plan
+                        if (user.plan.toLowerCase() === 'pro') {
+                            userPlan.classList.replace('bg-blue-100', 'bg-purple-100');
+                            userPlan.classList.replace('text-blue-800', 'text-purple-800');
+                        } else {
+                            // Free
+                            userPlan.classList.replace('bg-purple-100', 'bg-blue-100');
+                            userPlan.classList.replace('text-purple-800', 'text-blue-800');
+                        }
+
+                    } else {
+                        // Une erreur s'est produite lors de la récupération du profil
+                        console.error("Échec de la récupération du profil:", result.message);
+                        // Afficher un message d'erreur si nécessaire
+                    }
+
+                } catch (error) {
+                    console.error("Erreur réseau ou parsing lors de la récupération du profil:", error);
+                    // On pourrait afficher un message d'erreur réseau
+                }
             }
 
-        }, 500); // Délai de chargement simulé de 0.5 seconde
-    };
+            // --- Gestion de la Déconnexion ---
+            async function handleLogout(callApi = true) {
+                try {
+                    if (callApi) {
+                        const response = await fetch(`${BACKEND_URL}/api/logout`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+                        const result = await response.json();
+                        window.location.href = result.redirect || `${BACKEND_URL}/connexion`;
+                    } else {
+                        // Redirection forcée si l'API a déjà retourné 401
+                         window.location.href = `${BACKEND_URL}/connexion`;
+                    }
 
-    // Appel de la fonction au chargement de la page
-    loadUserRepositories(); 
-</script>
+                } catch (error) {
+                    console.error("Erreur lors de la déconnexion:", error);
+                    // En cas d'erreur de réseau, forcer la redirection
+                    window.location.href = `${BACKEND_URL}/connexion`;
+                }
+            }
+
+            // --- Affichage des messages Flash ---
+            function displayFlashMessages() {
+                // Cette fonction doit analyser le contenu de la page pour trouver un marqueur 
+                // ou faire un appel API pour récupérer les messages.
+                // Étant donné que le backend Flask gère la page, vous pouvez modifier l'injection
+                // dans le backend pour inclure les messages flash directement si vous utilisiez Jinja.
+                // Pour cette architecture de Passerelle, nous allons simuler la récupération/affichage des messages
+                // via une variable globale que vous devrez potentiellement injecter via la fonction get_external_page_content.
+
+                // Pour l'instant, nous laissons cela vide et nous appuyons sur la redirection POST/Redirect/GET 
+                // qui recharge la page via le backend. L'affichage des messages flash nécessite une injection
+                // de script Jinja/Flask ou une API dédiée, ce qui complexifierait beaucoup le code de get_external_page_content.
+                // Nous allons ignorer l'affichage des messages flash pour l'instant dans le JS client pur.
+            }
+
+
+            // --- Logique du Thème ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            const updateIcon = () => {
+                const icon = themeToggle.querySelector('.material-symbols-rounded');
+                if (html.classList.contains('light')) {
+                    icon.textContent = 'light_mode';
+                } else {
+                    icon.textContent = 'dark_mode';
+                }
+            };
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                html.classList.remove('light');
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
+            }
+            updateIcon();
+
+            themeToggle.addEventListener('click', () => {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    html.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    html.classList.remove('light');
+                    html.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                updateIcon();
+            });
+
+
+            // --- Chargement des Dépôts (Logique simplifiée pur l'exemple) ---
+            const loadUserRepositories = () => {
+                // Simulation d'un appel API qui sera réellement fait plus tard
+                setTimeout(() => {
+                    const userRepos = [
+                        // Cette liste sera remplacée par l'appel à /api/repository_list
+                    ];
+                    
+                    loadingMessage.classList.add('hidden');
+                    
+                    // Laissez l'exemple statique visible, mais le JS dynamique est la voie à suivre
+                    if (userRepos.length === 0) {
+                        repositoriesList.classList.remove('hidden'); // Garde l'exemple statique
+                        // noReposMessage.classList.remove('hidden'); // Afficherait si la liste était vide
+                    } else {
+                        // Logique pour afficher la liste dynamique ici
+                        noReposMessage.classList.add('hidden');
+                        repositoriesList.classList.remove('hidden');
+                    }
+
+                }, 500); 
+            };
+
+
+            // --- Événements et Initialisation ---
+            fetchUserInfo();
+            logoutButton.addEventListener('click', () => handleLogout(true));
+            loadUserRepositories(); 
+            displayFlashMessages();
+        });
+    </script>
 </body>
 </html>
